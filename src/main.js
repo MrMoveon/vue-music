@@ -3,9 +3,19 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from 'axios'
+import vueAxios from 'vue-axios'
+import fastclick from 'fastclick'
+import 'lib-flexible'
+import '@/assets/less/app.less'
+import muiComponents from './components/index.js'
 
 Vue.config.productionTip = false
+	
 
+Vue.use(vueAxios,axios)
+Vue.use(muiComponents)
+fastclick.attach(document.body)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

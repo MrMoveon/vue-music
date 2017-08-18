@@ -1,18 +1,19 @@
 <template>
-    <div>me</div>
+    <div>
+        me</div>
 </template>
 
 <script>
 export default {
-    name:'Me',
-    data(){
+    name: 'Me',
+    data() {
         return {
-            
+
         }
     }
 }
 </script>
 
 <style>
-  
+
 </style>

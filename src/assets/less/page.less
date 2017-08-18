@@ -1,0 +1,32 @@
+
+.page, .page-group {
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+//移动动画基类
+.page{
+     transition: all .5s cubic-bezier(.55,0,.1,1);
+     -webkit-transition: all .5s cubic-bezier(.55,0,.1,1);
+}
+//透明度动画
+.slide-fade-enter,.slide-left-leave-active{
+    opacity: 0;
+}
+.slide-fade-enter, .slide-fade-leave-active {
+  opacity: 0;
+}
+//左右移动动画
+.slide-left-enter, .slide-right-leave-active {
+  opacity: 0;
+  -webkit-transform: translate(50px, 0);
+  transform: translate(50px, 0);
+}
+.slide-left-leave-active, .slide-right-enter {
+  opacity: 0;
+  -webkit-transform: translate(-50px, 0);
+  transform: translate(-50px, 0);
+}

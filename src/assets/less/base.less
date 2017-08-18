@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout:none;
+  }
+  
+  // We fix position the body and scroll `.content`.
+  body {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: @font-family-default;
+    font-size: @font-size-default;
+    line-height: 1.5;
+    color: @color-text;
+    overflow: hidden;
+  }
+  
+  a, input, textarea, select, button {
+      outline: 0;
+  }
+  
+  p {
+      margin: 0;
+  }
+  
+  // Universal link styling
+  a {
+    color: @color-text;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0); // Removes the dark touch outlines on links in webkit browsers.
+  
+    &:active {
+      color: @color-text;
+    }
+  }
+  
+  .mui-page {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2000;
+  }
+  
+  // Wrapper to be used around all content not in .bar-title and .bar-tab
+  .mui-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .mui-header ~ .mui-content{
+    padding-top:@header-height;
+  }
+  // Utility classes
+  
+  .mui-content-padded {
+    margin: 15px;
+  }
+  .mui-text-center {
+    text-align: center;
+  }
+  .mui-pull-left {
+    float: left;
+  }
+  .mui-pull-right {
+    float: right;
+  }
+  .mui-clearfix {
+    .clearfix();
+  }

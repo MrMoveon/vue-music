@@ -8,6 +8,7 @@ import vueAxios from 'vue-axios'
 import fastclick from 'fastclick'
 import 'lib-flexible'
 import '@/assets/less/app.less'
+import '@/libs/swiper/css/swiper.min.css'
 import muiComponents from './components/index.js'
 
 Vue.config.productionTip = false

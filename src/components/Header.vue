@@ -86,8 +86,8 @@ export default {
     height: @header-height;
     overflow: hidden;
     color: #fff;
-    
     padding:0 10/@rem;
+    .w750;
     //.hairline(bottom,@color-split);
     
    &.is-fixed{

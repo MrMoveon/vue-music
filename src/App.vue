@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="page-group">
+  <div id="app" class="mui-page-group">
     <router-view></router-view>
   </div>
 </template>

@@ -13,13 +13,13 @@
         </mui-header>
         <top-search></top-search>
         <div class="mui-container">
-
-        </div>
-        <mui-swiper v-if="swiperData.length" :data="swiperData">
-                <div class="mui-swiper-item" v-for="(item , index) in swiperData" :key="index">
+            <mui-swiper v-if="swiperData.length" :autoPlay='3000'>
+                <div class="swiper-slide" v-for="(item , index) in swiperData" :key="index">
                     <a :href="item.link"><img :src="item.url" alt=""></a>
                 </div>
-        </mui-swiper>
+            </mui-swiper>
+        </div>
+        
     </div>
 </template>
 
@@ -35,11 +35,11 @@ export default {
                     link:'#'
                 },
                 {
-                     url:require('../../assets/images/banner.jpg'),
+                    url:require('../../assets/images/banner.jpg'),
                     link:'#'
                 },
                 {
-                     url:require('../../assets/images/banner.jpg'),
+                    url:require('../../assets/images/banner.jpg'),
                     link:'#'
                 },
                 {
@@ -77,7 +77,7 @@ export default {
 }
 
 .top-search ~ .mui-container{
-    padding-top:(88+75-2)/@rem;
+    padding-top:(88+75-4)/@rem;
 }
 
 </style>

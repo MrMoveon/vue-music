@@ -1,5 +1,5 @@
 <template>
-    <div class="mui-page">
+    <div class="mui-page music-home">
         <mui-header title="音乐馆" fixed tabs>
             <router-link to='/List' slot="left" tag="span">
                 <img class="icon-img" src="../../assets/images/top_tab_more_selected.png" alt="">
@@ -12,48 +12,41 @@
             <img class="icon-img" slot="right" src="../../assets/images/top_tab_mymusic_selected.png" alt="">
         </mui-header>
         <top-search></top-search>
-        <div class="mui-container">
-            <mui-swiper v-if="swiperData.length" :autoPlay='3000'>
-                <div class="swiper-slide" v-for="(item , index) in swiperData" :key="index">
-                    <a :href="item.link"><img :src="item.url" alt=""></a>
-                </div>
-            </mui-swiper>
+        <div class="mui-container ">
+            <!-- 幻灯片 -->
+            <mui-slide v-if="slideData.length" :autoPlay='3000'>
+                <mui-slide-item v-for="(item,index) in slideData" :key='index' :item='item'></mui-slide-item>
+            </mui-slide>
+            <music-menu></music-menu>    
         </div>
         
     </div>
 </template>
 
 <script>
+import {getSilde} from '@/api/music'
 import TopSearch from './TopSearch'
+import MusicMenu from './MusicMenu'
 export default {
     name: 'Musci',
     data() {
         return {
-            swiperData:[
-                {
-                    url:require('../../assets/images/banner.jpg'),
-                    link:'#'
-                },
-                {
-                    url:require('../../assets/images/banner.jpg'),
-                    link:'#'
-                },
-                {
-                    url:require('../../assets/images/banner.jpg'),
-                    link:'#'
-                },
-                {
-                    url:require('../../assets/images/banner.jpg'),
-                    link:'#'
-                }
-            ]        
+            slideData:[]        
         }
     },
+    mounted(){
+        this.loadData()
+    },
     methods: {
-
+        loadData(){
+           getSilde().then((res)=>{
+               this.slideData=res.data.slider
+            })
+        }
     },
     components:{
-        TopSearch
+        TopSearch,
+        MusicMenu
     }
 
 }
@@ -79,5 +72,7 @@ export default {
 .top-search ~ .mui-container{
     padding-top:(88+75-4)/@rem;
 }
-
+.music-home{
+    background: #f4f4f4;
+}
 </style>

@@ -13,7 +13,7 @@ import muiComponents from './components/index.js'
 
 Vue.config.productionTip = false
 	
-
+Vue.prototype.$http=axios
 Vue.use(vueAxios,axios)
 Vue.use(muiComponents)
 fastclick.attach(document.body)

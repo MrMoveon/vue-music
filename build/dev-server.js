@@ -1,5 +1,6 @@
 require('./check-versions')()
-
+var axios=require('axios')
+var cheerio = require('cheerio')
 var config = require('../config')
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
@@ -21,6 +22,21 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+var apiRoutes = express.Router();
+apiRoutes.get('/slide',(req,res)=>{
+  var url='https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg';
+  axios.get(url,{
+    headers:{
+      referer:'https://m.y.qq.com/',
+      host:'m.y.qq.com'
+    },
+    params:req.query
+  }).then((response)=>{
+    res.json(response.data.data)
+  })
+  
+})
+app.use('/api',apiRoutes);
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {

@@ -62,7 +62,7 @@ export default {
     .mui-view-items{
         display: flex;
         flex-direction: column;
-        padding-left: 30/@rem;
+        padding-left: 20/@rem;
        
         a{
             display: block;

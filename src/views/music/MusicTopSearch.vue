@@ -20,6 +20,7 @@ export default {
     top:@header-height;
     left: 0;
     right: 0;
+    z-index: 2;
     .w750;
     margin-top: -2px;
     height: 75/@rem;

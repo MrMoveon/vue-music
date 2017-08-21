@@ -1,5 +1,5 @@
 <template>
-    <div class="swiper-slide">
+    <div class="mui-slide-item swiper-slide">
         <a :href="item.linkUrl"><img :src="item.picUrl" alt=""></a>
     </div>
 </template>
@@ -17,7 +17,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

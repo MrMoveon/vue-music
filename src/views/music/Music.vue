@@ -11,13 +11,16 @@
             </div>
             <img class="icon-img" slot="right" src="../../assets/images/top_tab_mymusic_selected.png" alt="">
         </mui-header>
-        <top-search></top-search>
+        <music-top-search></music-top-search>
         <div class="mui-container ">
             <!-- 幻灯片 -->
             <mui-slide v-if="slideData.length" :autoPlay='3000'>
                 <mui-slide-item v-for="(item,index) in slideData" :key='index' :item='item'></mui-slide-item>
             </mui-slide>
-            <music-menu></music-menu>    
+            <!-- 首页菜单 -->
+            <music-menu></music-menu>  
+            <!-- 新歌速递 -->
+            <music-new-song></music-new-song>
         </div>
         
     </div>
@@ -25,8 +28,9 @@
 
 <script>
 import {getSilde} from '@/api/music'
-import TopSearch from './TopSearch'
+import MusicTopSearch from './MusicTopSearch'
 import MusicMenu from './MusicMenu'
+import MusicNewSong from './MusicNewSong'
 export default {
     name: 'Musci',
     data() {
@@ -45,8 +49,9 @@ export default {
         }
     },
     components:{
-        TopSearch,
-        MusicMenu
+        MusicTopSearch,
+        MusicMenu,
+        MusicNewSong
     }
 
 }

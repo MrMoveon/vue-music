@@ -1,13 +1,13 @@
 <template>
     <div class="mui-page music-home">
         <mui-header title="音乐馆" fixed tabs>
-            <router-link to='/List' slot="left" tag="span">
+            <router-link :to="{name:'Music',query:{'slidebar':true}}" slot="left" tag="span">
                 <img class="icon-img" src="../../assets/images/top_tab_more_selected.png" alt="">
             </router-link>
             <div class="mui-header-tabs" slot="middle">
-                <a class="mui-header-tabs-item">我的</a>
-                <a class="mui-header-tabs-item active">音乐馆</a>
-                <a class="mui-header-tabs-item">发现</a>
+                <router-link :to="{name:'Me'}" tag='a' class="mui-header-tabs-item">我的</router-link>
+                <router-link :to="{name:'Music'}" tag='a' class="mui-header-tabs-item">音乐馆</router-link>
+                <router-link :to="{name:'Found'}" tag='a' class="mui-header-tabs-item">发现</router-link>
             </div>
             <img class="icon-img" slot="right" src="../../assets/images/top_tab_mymusic_selected.png" alt="">
         </mui-header>
@@ -71,7 +71,7 @@ export default {
                 this.$nextTick(()=>{
                     setTimeout(()=>{
                         this.$refs.musicScrollV.update();
-                    },1000)
+                    },20)
                 })
             })
         }

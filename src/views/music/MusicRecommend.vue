@@ -3,9 +3,9 @@
         <div class="title">热门歌单推荐</div>
         <div class="music-recommend-container">
             <ul class="music-recommend-list">
-                <li  class="music-recommend-list-item" v-for="(item,index) in recommendList" :key="index">
+                <li  class="music-recommend-list-item" v-for="(item,index) in recommend" :key="index">
                     <div class="icon">
-                        <img :src="item.imgurl" alt="">
+                        <img v-lazy="item.imgurl" alt="">
                     </div>
                     <div class="text">
                         <div class="name">{{item.creator.name}}</div>
@@ -21,23 +21,12 @@
 import { getRecommend } from '@/api/music'
 export default {
     name: 'MusicRecommend',
-    data() {
-        return {
-            recommendList: []
-        }
-    },
-    mounted() {
-        this.loadData();
-    },
-    methods: {
-        loadData() {
-            getRecommend().then(res => {
-                if (res.data.code === 0) {
-                    this.recommendList = res.data.data.list;
-                    //this.parent.$refs.musicScrollV.update();
-                }
-
-            })
+    props:{
+        recommend:{
+            type:Array,
+            default:function(){
+                return []
+            }
         }
     }
 }

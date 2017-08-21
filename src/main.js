@@ -10,12 +10,18 @@ import 'lib-flexible'
 import '@/assets/less/app.less'
 import '@/libs/swiper/css/swiper.min.css'
 import muiComponents from './components/index.js'
-
+import VueLazyload from 'vue-lazyload'
 Vue.config.productionTip = false
 	
 Vue.prototype.$http=axios
 Vue.use(vueAxios,axios)
 Vue.use(muiComponents)
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: require('./assets/images/lyric_poster_default_bg3_small.jpg'),
+  loading:  require('./assets/images/lyric_poster_default_bg3_small.jpg'),
+  attempt: 1
+})
 fastclick.attach(document.body)
 /* eslint-disable no-new */
 new Vue({

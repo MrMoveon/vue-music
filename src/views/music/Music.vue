@@ -12,7 +12,8 @@
             <img class="icon-img" slot="right" src="../../assets/images/top_tab_mymusic_selected.png" alt="">
         </mui-header>
         <music-top-search></music-top-search>
-        <mui-scroll-view name="music-scroll-v" direction="vertical" slidesPerView="auto" class="music-container" ref="musicScrollV">
+        <mui-scroll-view name="music-scroll-v" direction="vertical" slidesPerView="auto" :scrollbar="null" class="music-container" ref="musicScrollV">
+            <mui-scroll-view-item style="height:auto">
             <div class="mui-container " style="overflow:initial;position:static">
                 <!-- 幻灯片 -->
                 <mui-slide v-if="slideData.length" :autoPlay='3000'>
@@ -21,10 +22,11 @@
                 <!-- 首页菜单 -->
                 <music-menu></music-menu>  
                 <!-- 新歌速递 -->
-                <music-new-song></music-new-song>
+                <music-new-song :newSong="newSong"></music-new-song>
                 <!-- 热门歌单推荐 -->
-                <music-recommend></music-recommend>
+                <music-recommend :recommend="recommend"></music-recommend>
             </div>
+            </mui-scroll-view-item>
         </mui-scroll-view>
         
         
@@ -32,7 +34,7 @@
 </template>
 
 <script>
-import {getSilde,getNewSong,getRecommend,getSilde2,getNewSong2,getRecommend2} from '@/api/music'
+import {getSilde,getNewSong,getRecommend} from '@/api/music'
 import MusicTopSearch from './MusicTopSearch'
 import MusicMenu from './MusicMenu'
 import MusicNewSong from './MusicNewSong'
@@ -41,7 +43,9 @@ export default {
     name: 'Musci',
     data() {
         return {
-            slideData:[]        
+            slideData:[],
+            newSong:[],
+            recommend:[]
         }
     },
     mounted(){
@@ -56,8 +60,19 @@ export default {
         },
         loadAll(){
             
-            Promise.all([getSilde2(),getNewSong2(),getRecommend2()]).then(results=>{
-                console.log(results)
+            Promise.all([getSilde(),getNewSong(),getRecommend()]).then(results=>{
+                this.slideData=results[0].data.slider
+                if(results[1].code===0){
+                    this.newSong=results[1].data.albumlist
+                }
+                if(results[2].code===0){
+                    this.recommend=results[2].data.list
+                }
+                this.$nextTick(()=>{
+                    setTimeout(()=>{
+                        this.$refs.musicScrollV.update();
+                    },1000)
+                })
             })
         }
     },
@@ -87,11 +102,8 @@ export default {
         font-weight: @font-weight;
     }
 }
- .mui-header ~ .mui-container{
-    padding-top:@header-height;
-    overflow: initial;
-  }
-div.top-search ~ .mui-container{
+ 
+.music-home .mui-container{
     padding-top:(88+75-4)/@rem;
     overflow: initial;
 }

@@ -4,10 +4,10 @@
             新歌速递
         </div>
         <div class="song-wrap">
-            <mui-scroll-view v-if="songData.length" ref="scrollView">
+            <mui-scroll-view v-if="songData.length" ref="scrollView" name="newSong" :scrollbar="null">
                 <mui-scroll-view-item v-for="(item,index) in songData" :key='index'>
                     <a href="javascript:;">
-                        <img :src="item.url" alt="">
+                        <img v-lazy="item.url" alt="">
                         <span>{{item.album_name}}</span>
                     </a>
                 </mui-scroll-view-item>
@@ -20,24 +20,21 @@
 import { getNewSong } from '@/api/music'
 export default {
     name: 'MusicNewSong',
-    data() {
-        return {
-            songData: []
+    props:{
+        newSong:{
+            type:Array,
+            default:function(){
+                return []
+            }
         }
     },
-    mounted() {
-        setTimeout(() => {
-            this.loadData();
-        }, 20)
+   
+    computed:{
+        songData(){
+            return this.setSongUrl(this.newSong)
+        }
     },
     methods: {
-        loadData() {
-            getNewSong().then(res => {
-                if (res.code === 0) {
-                    this.songData = this.setSongUrl(res.data.albumlist)
-                }
-            })
-        },
         setSongUrl(data){
             return data.map(item=>{
                 item.url='https://y.gtimg.cn/music/photo_new/T002R300x300M000'+ item.album_mid +'.jpg?max_age=2592000'

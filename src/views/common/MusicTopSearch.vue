@@ -27,6 +27,7 @@ export default {
     background: @color-primary;
     box-sizing: border-box;
     padding:0 10/@rem 10/@rem 10/@rem;
+    transition: all 0.3s;
     .top-search-area{
         background: @color-primary-darken;
         display: flex;
@@ -41,6 +42,11 @@ export default {
     .icon-img{
         width: 56/@rem;
         height: 56/@rem;
+    }
+
+    &.is-hide{
+        @top:-80/@rem;
+        transform: translate3d(0,@top,0);
     }
 }
 </style>

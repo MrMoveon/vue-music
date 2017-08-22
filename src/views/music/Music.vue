@@ -1,18 +1,13 @@
 <template>
     <div class="mui-page music-home">
-        <mui-header title="音乐馆" fixed tabs>
-            <router-link :to="{name:'Music',query:{'slidebar':true}}" slot="left" tag="span">
-                <img class="icon-img" src="../../assets/images/top_tab_more_selected.png" alt="">
-            </router-link>
-            <div class="mui-header-tabs" slot="middle">
-                <router-link :to="{name:'Me'}" tag='a' class="mui-header-tabs-item">我的</router-link>
-                <router-link :to="{name:'Music'}" tag='a' class="mui-header-tabs-item">音乐馆</router-link>
-                <router-link :to="{name:'Found'}" tag='a' class="mui-header-tabs-item">发现</router-link>
-            </div>
-            <img class="icon-img" slot="right" src="../../assets/images/top_tab_mymusic_selected.png" alt="">
-        </mui-header>
-        <music-top-search></music-top-search>
-        <mui-scroll-view name="music-scroll-v" direction="vertical" slidesPerView="auto" :scrollbar="null" class="music-container" ref="musicScrollV">
+        
+        <mui-scroll-view class="music-container" 
+            ref="musicScrollV" 
+            name="music-scroll-v" 
+            direction="vertical" 
+            slidesPerView="auto" 
+            :scrollbar="null"
+            >
             <mui-scroll-view-item style="height:auto">
             <div class="mui-container " style="overflow:initial;position:static">
                 <!-- 幻灯片 -->
@@ -35,7 +30,7 @@
 
 <script>
 import {getSilde,getNewSong,getRecommend} from '@/api/music'
-import MusicTopSearch from './MusicTopSearch'
+import MusicHeader from '../common/MusicHeader'
 import MusicMenu from './MusicMenu'
 import MusicNewSong from './MusicNewSong'
 import MusicRecommend from './MusicRecommend'
@@ -70,14 +65,49 @@ export default {
                 }
                 this.$nextTick(()=>{
                     setTimeout(()=>{
+                        //执行更新
                         this.$refs.musicScrollV.update();
+                        //执行子组件的回调函数
+                        this.$refs.musicScrollV.done(this.touchmove());
                     },20)
                 })
+            })
+        },
+        /**
+         * 获取 musicScrollV 的 swiper对象，通过TouchStart，TouchMove，TouchEnd来获取偏移值，设置顶部搜索的显示隐藏
+         */
+        touchmove(){
+            // 获取 musicScrollV 的 swiper对象
+            var scroll=this.$refs.musicScrollV.getCurrentObj()
+            var vm=this;
+            //
+            scroll.on('TouchStart', function(swiper,event){
+               //获取按下的pageY值
+                var touch=event.touches[0]
+                vm.pageY1=touch.pageY;
+            })
+            scroll.on('TouchMove', function(swiper,event){
+                //获取移动的pageY值
+                var touch=event.touches[0]
+                vm.pageY2=touch.pageY;
+            })
+            scroll.on('TouchEnd', function(swiper,event){
+                //释放 判断translate距离来控制searchde 显示隐藏
+                if(swiper.translate<-120){
+                    vm.$store.commit('CHANGE_SEARCH_STATUS',true)
+                    if(vm.pageY2-vm.pageY1<0){
+                        vm.$store.commit('CHANGE_SEARCH_STATUS',true)
+                    }else{
+                            vm.$store.commit('CHANGE_SEARCH_STATUS',false)
+                    }
+                }else{
+                    vm.$store.commit('CHANGE_SEARCH_STATUS',false)
+                }
             })
         }
     },
     components:{
-        MusicTopSearch,
+        MusicHeader,
         MusicMenu,
         MusicNewSong,
         MusicRecommend
@@ -89,19 +119,7 @@ export default {
 <style lang='less'>
 @import '../../assets/less/variables.less';
 @import '../../assets/less/mixins.less';
-// tabs
-.mui-header-tabs{
-    .mui-header-tabs-item{
-        color: #d0eedd;
-    }
-    .mui-header-tabs-item:nth-child(2){
-        color: #fff;
-        padding: 0 40/@rem 0 40/@rem;
-    }
-    .active{
-        font-weight: @font-weight;
-    }
-}
+
  
 .music-home .mui-container{
     padding-top:(88+75-4)/@rem;

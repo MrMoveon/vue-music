@@ -16,17 +16,26 @@ export default new Router({
     {
       path: '/music',
       name: 'Music',
-      component: Music
+      component: Music,
+      meta:{
+        cache:true
+      }
     },
     {
       path: '/me',
       name: 'Me',
-      component: Me
+      component: Me,
+      meta:{
+        cache:true
+      }
     },
     {
       path: '/found',
       name: 'Found',
-      component: Found
+      component: Found,
+      meta:{
+        cache:true
+      }
     },
     {
       path:'*',

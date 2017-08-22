@@ -46,7 +46,7 @@ export default {
     },
     methods: {
         initScrollview() {
-            console.log('init')
+            var vm=this
             this['scrollview'+this.name] = new Swiper('#'+this.name, {
                 scrollbar:this.scrollbar,
                 direction:this.direction,   //滚动方向
@@ -55,13 +55,49 @@ export default {
                 roundLengths:true,//防止文字模糊
                 observer: true,
                 observeParents: true
+                // onSliderMove: function(swiper, event){
+                   
+                // },
+                // onTouchStart: function(swiper, event){
+                //     //获取按下的pageY值
+                //     var touch=event.touches[0]
+                //     this.pageY1=touch.pageY;
+                // },
+                // onTouchMove: function(swiper, event){
+                //     //获取移动的pageY值
+                //     var touch=event.touches[0]
+                //     this.pageY2=touch.pageY;
+                // },
+                // onTouchEnd: function(swiper, event){
+                //     //释放 判断translate距离来控制searchde 显示隐藏
+                //    if(swiper.translate<-120){
+                //         vm.$store.commit('CHANGE_SEARCH_STATUS',true)
+                //         if(this.pageY2-this.pageY1<0){
+                //             vm.$store.commit('CHANGE_SEARCH_STATUS',true)
+                //         }else{
+                //              vm.$store.commit('CHANGE_SEARCH_STATUS',false)
+                //         }
+                //     }else{
+                //         vm.$store.commit('CHANGE_SEARCH_STATUS',false)
+                //     }
+                // },
             });
         },
         update(){
             //更新操作
-            console.log('update')
-             this['scrollview'+this.name].update()
+            this['scrollview'+this.name].update()
+        },
+        //获取swiper对象
+        getCurrentObj(){
+            return this['scrollview'+this.name];
+        },
+        //父组件执行回调
+        done(callback){
+            var vm=this;
+            if(callback) callback || callback();
+            return false;
         }
+       
     }
 }
 </script>

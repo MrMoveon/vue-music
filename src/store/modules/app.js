@@ -1,11 +1,15 @@
 import * as types from '../types'
 const app={
     state:{
-        searchStatus:false
+        searchStatus:false,
+        isLogin:false
     },
     mutations:{
         [types.CHANGE_SEARCH_STATUS](state,val){
             state.searchStatus=val
+        },
+        [types.CHANGE_LOGIN_STATUS](state,val){
+            state.isLogin=val
         }
     },
     actions:{

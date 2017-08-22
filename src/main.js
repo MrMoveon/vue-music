@@ -29,6 +29,18 @@ Vue.use(VueLazyload, {
   attempt: 1
 })
 fastclick.attach(document.body)
+//具有顶部搜索框的路由
+var hasSearchRouter=['Me','Music','Found']
+router.beforeEach((to, from, next) => {
+  //如果存在，就显示搜索框
+  if(hasSearchRouter.indexOf(to.name)>=0){
+    store.commit('CHANGE_SEARCH_STATUS',false)
+  }else{
+    store.commit('CHANGE_SEARCH_STATUS',true)
+  }
+  next()
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -24,8 +24,8 @@ Vue.use(muiComponents)
 // 使用vue-lazyload插件，
 Vue.use(VueLazyload, {
   preLoad: 1.3,
-  error: require('./assets/images/lyric_poster_default_bg3_small.jpg'),
-  loading:  require('./assets/images/lyric_poster_default_bg3_small.jpg'),
+  error: require('./assets/images/loading.jpg'),
+  loading:  require('./assets/images/loading.jpg'),
   attempt: 1
 })
 fastclick.attach(document.body)

@@ -5,9 +5,9 @@
                 <img class="icon-img" src="../../assets/images/top_tab_more_selected.png" alt="">
             </router-link>
             <div class="mui-header-tabs" slot="middle">
-                <router-link :to="{name:'Me'}" tag='a' class="mui-header-tabs-item">我的</router-link>
-                <router-link :to="{name:'Music'}" tag='a' class="mui-header-tabs-item">音乐馆</router-link>
-                <router-link :to="{name:'Found'}" tag='a' class="mui-header-tabs-item">发现</router-link>
+                <router-link :to="{name:'Me'}" tag='a' class="mui-header-tabs-item" replace>我的</router-link>
+                <router-link :to="{name:'Music'}" tag='a' class="mui-header-tabs-item" replace>音乐馆</router-link>
+                <router-link :to="{name:'Found'}" tag='a' class="mui-header-tabs-item" replace>发现</router-link>
             </div>
             <img class="icon-img" slot="right" src="../../assets/images/top_tab_mymusic_selected.png" alt=""  @click="CHANGE_SEARCH_STATUS(true)">
         </mui-header>

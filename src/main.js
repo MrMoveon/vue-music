@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import vueAxios from 'vue-axios'
-import fastclick from 'fastclick'
+import Fastclick from 'fastclick'
 
 import 'lib-flexible'
 import '@/assets/less/app.less'
@@ -28,10 +28,11 @@ Vue.use(VueLazyload, {
   loading:  require('./assets/images/loading.jpg'),
   attempt: 1
 })
-fastclick.attach(document.body)
+Fastclick.attach(document.body)
 //具有顶部搜索框的路由
 var hasSearchRouter=['Me','Music','Found']
 router.beforeEach((to, from, next) => {
+
   //如果存在，就显示搜索框
   if(hasSearchRouter.indexOf(to.name)>=0){
     store.commit('CHANGE_SEARCH_STATUS',false)

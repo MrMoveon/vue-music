@@ -1,12 +1,13 @@
 <template>
-    <div class="mui-list">
+    <div class="mui-list" @click="handleClick">
         <div class="mui-list-left"  :class="{'is-right':align==='right'}">
             <div class="mui-icon" v-if="icon" :class="{'radius':radius}">
-                <img :src="icon" alt="" :style="{width:iconW,height:iconH}">
+                <img :src="icon">
             </div>
             <div class="mui-text">
-                <span class="title" v-if="title" v-text="title"></span>
-                <span class="desc" :class="'mui-ellipsis-'+ellipsis" v-if="desc" v-text="desc"></span>
+                <span class="title mui-ellipsis-1" v-if="title" v-text="title"></span>
+                <span class="desc mui-ellipsis-1"  v-if="desc" v-text="desc"></span>
+                <slot name="text"></slot>
             </div>
         </div>
         <div class="mui-list-right" v-if="align != 'right'">
@@ -19,6 +20,8 @@
 export default {
     name:'MediaList',
     props:{
+        to:[String,Object],
+        replace:Boolean,
         arrow:{
             type:Boolean,
             default:true
@@ -26,16 +29,6 @@ export default {
         icon:{
             type:String,
             default:''
-        },
-        iconSize:{
-            type:Array,
-            default:function(){
-                return []
-            }
-        },
-        ellipsis:{
-            type:Number,
-            default:1
         },
         align:{
             type:String,
@@ -54,14 +47,21 @@ export default {
             default:''
         },
     },
-    computed:{
-        iconW(){
-            return this.iconSize.length>1?this.iconSize[0]:''
-        },
-        iconH(){
-            return this.iconSize.length>1?this.iconSize[1]:''
+    methods:{
+        handleClick(){
+            if(!this.to) return
+            // 根据:to="{name:'Music'}"  to="http://www.baidu.com"   传递的类型来判断跳转类型
+            if(typeof this.to === 'object'){
+                if(this.replace){
+                    return this.$router.replace(this.to)
+                }
+                return this.$router.push(this.to)
+            }else if(typeof this.to === 'string'){
+                return window.location.href=this.to;
+            }
         }
     }
+
 }
 </script>
 
@@ -73,7 +73,6 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items:center;
     padding: 30/@rem 30/@rem;
     //居右
     
@@ -81,17 +80,22 @@ export default {
     .mui-list-left{
         display: flex;
         flex-direction: row;
-        align-items:center;
+       
         .mui-text{
             display: flex;
+            flex:1;
             flex-direction: column;
+            flex-wrap: wrap;
             text-align: left;
+            
         }
         .title{
             .font-dpr(16px);
+            color:#333;
         }
         .desc{
             .font-dpr(14px);
+            color:#999;
         }
         &.is-right{
             width: 100%;
@@ -117,6 +121,7 @@ export default {
     }
 
     .mui-list-right{
+        align-self:center;
         .iconfont{
             .font-dpr(16px);
             color:#999;

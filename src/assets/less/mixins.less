@@ -119,9 +119,13 @@
 
 
 .mui-ellipsis-1{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    display:-webkit-box;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    word-wrap:break-word;
+    white-space:normal!important;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical
 }
 .mui-ellipsis-2{
     display:-webkit-box;

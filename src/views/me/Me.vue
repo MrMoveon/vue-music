@@ -5,28 +5,15 @@
 
                 <me-login></me-login>
                 <me-menu></me-menu>
-               
-                <mui-cell title="猜您喜欢" value="10" :to="{name:'Music',query:{id:123}}">
-                </mui-cell>
-                <mui-cell icon="icon-shoucang-fill" icon-color='#3cb67b' title="收藏"  value="20" :to="{name:'Music',query:{id:123}}">
-                </mui-cell>
-                <mui-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')"  title="收藏" :to="{name:'Music',query:{id:123}}">
-                </mui-cell>
-                <mui-cell title="猜您喜欢" desc="来听听和【不爱你】一样好听的歌曲吧" to="http://www.baidu.com">
-                </mui-cell>
-                 <mui-media-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" align="right" title="猜您喜欢" desc="来听听和【不爱你】一样好听的歌曲吧来听听和【不爱你】一样好听的歌曲吧">
+                <div class="guess-you-like">
+                <mui-media-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" align="right" title="猜您喜欢" desc="来听听和【不爱你】一样好听的歌曲吧">
                 </mui-media-cell>
-                <mui-media-cell to="http://www.baidu.com" :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" >
-                    <div class="othen-text" slot="text">
-                        <div>猜您喜欢</div>
-                        <p>来听听和【不爱你】一样好听的歌曲吧来听听和【不爱你】一样好听的歌曲吧来听听和【不爱你】一样好听的歌曲吧</p>
-                        <p>来听听和【不爱你】一样好听的歌曲吧</p>
-                        <p>来听听和【不爱你】一样好听的歌曲吧</p>
-                    </div>
+                </div>
+                <mui-cell title="我的歌单" value="10">
+                </mui-cell>
+                <mui-media-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" title="New" desc="56首">
                 </mui-media-cell>
-                <mui-media-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" title="猜您喜欢" desc="来听听和【不爱你】一样好听的歌曲吧">
-                </mui-media-cell>
-                <mui-media-cell radius :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" title="猜您喜欢" desc="来听听和【不爱你】一样好听的歌曲吧来听听和【不爱你】一样好听的歌曲吧">
+                <mui-media-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" title="好听的" desc="32首">
                 </mui-media-cell>
                
             </mui-scroll-view-item>
@@ -67,5 +54,16 @@ export default {
 
 .music-container {
     height: 100%;
+}
+.guess-you-like{
+    border: 24/@rem solid #f4f4f4;
+    border-right: none;
+    border-left: none;
+    .mui-media-list{
+        .mui-thumb{
+            width: 90/@rem;
+            height: 90/@rem;
+        }
+    }
 }
 </style>

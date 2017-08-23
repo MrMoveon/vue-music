@@ -1,6 +1,6 @@
 <template>
     <div class="music-header">
-        <mui-header title="音乐馆" fixed tabs>
+        <mui-header title="音乐馆" fixed tabs color="green">
             
             <router-link :to="{name:'Music',query:{'slidebar':true}}" slot="left" tag="span">
                  <span class="iconfont icon-caidan"></span>

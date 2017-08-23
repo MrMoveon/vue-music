@@ -17,7 +17,7 @@
                 </div>
             </mui-scroll-view-item>
         </mui-scroll-view>
-
+        
     </div>
 </template>
 

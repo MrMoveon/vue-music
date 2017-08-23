@@ -9,10 +9,57 @@
 @font-weight: bold;
 @font-weight-light: 400;
 @rem:75rem;
-//颜色
-@color-primary:#31c27c;
-@color-primary-darken:#2caf70;
 
-
-@color-text:#333;
 @header-height:88/@rem;
+
+
+
+
+
+// 主色
+@color-primary: #0894ec;
+@color-danger: #f6383a;
+@color-warning: #f60;
+@color-success: #31c27c;
+
+@color-primary-active: #0a8ddf;
+@color-danger-active: darken(@color-danger, 10%);
+@color-warning-active: darken(@color-warning, 10%);
+@color-success-active: #2caf70;
+
+@color-blue: @color-primary;
+@color-red: @color-danger;
+@color-org: @color-warning;
+@color-green: @color-success;
+
+@color-blue-active: #0a8ddf;
+@color-red-active: darken(@color-danger, 10%);
+@color-org-active: darken(@color-warning, 10%);
+@color-green-active: #2caf70;
+
+@color-split: #e7e7e7;  //分割线的颜色
+@color-bg: #eee;
+@color-text: #3d4145; //文案色
+@color-text-secondary: #5f646e; //次级文案
+@color-text-gray: #999; //灰色文案
+@color-text-gray-light: #ccc; //更灰色文案
+
+//链接色
+@color-link: @color-primary; //链接色有可能不同于主色
+@color-link-active: @color-primary-active; //链接色有可能不同于主色
+
+
+// Transitions
+// --------------------------------------------------
+
+@timing-fuction: cubic-bezier(.1,.5,.1,1); // Inspired by @c2prods
+
+
+// Borders
+// --------------------------------------------------
+
+@border-default-width: 1px;
+@border-default-color: @color-split;
+@border-default: @border-default-width solid @border-default-color;
+@border-radius: 4px;
+

@@ -42,8 +42,8 @@ export default {
             width: 200/@rem;
             height: 60/@rem;
             line-height:60/@rem;
-            border: 3/@rem solid @color-primary;
-            color: @color-primary;
+            border: 3/@rem solid @color-green;
+            color: @color-green;
             .font-dpr(14px);
         }
     }
@@ -81,7 +81,7 @@ export default {
                 .font-dpr(12px);
             }
             .vip-label{
-                color:@color-primary;
+                color:@color-green;
             }
 
         }

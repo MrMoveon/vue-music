@@ -100,6 +100,9 @@ export default {
    &--primary{
     background-color:@color-primary;
    }
+   &--green{
+    background-color:@color-green;
+   }
    &--white{
     background-color:#fff;
     color: @color-text;

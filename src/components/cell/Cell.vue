@@ -25,6 +25,7 @@
  * @param {Boolean} [replace] -  链接跳转，替换掉当前的 history 记录
  * @param {Boolean} [arrow] -  右侧箭头显示
  * @param {string} [icon] -  icon图标class名
+ * @param {string} [value] -  右侧value值
  * @param {string} [img] -  图片地址
  * @param {Boolean} [radius] -  图片圆角
  * @param {string} [title] -  标题

@@ -24,12 +24,12 @@ export default {
     .w750;
     margin-top: -2px;
     height: 75/@rem;
-    background: @color-primary;
+    background: @color-green;
     box-sizing: border-box;
     padding:0 10/@rem 10/@rem 10/@rem;
     transition: all 0.3s;
     .top-search-area{
-        background: @color-primary-darken;
+        background: @color-green-active;
         display: flex;
         height: 100%;
         flex-direction: row;

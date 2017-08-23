@@ -5,15 +5,24 @@
       <router-view></router-view>
     </keep-alive>
     <router-view v-else></router-view>
+    <music-login v-if="isLogin"></music-login>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import MusicHeader from './views/common/MusicHeader'
+import MusicLogin from './views/me/login/Login'
 export default {
   name: 'app',
   components: {
-    MusicHeader
+    MusicHeader,
+    MusicLogin
+  },
+  computed:{
+    ...mapGetters([
+      'isLogin'
+      ])
   }
 }
 </script>

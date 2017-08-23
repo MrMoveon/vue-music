@@ -120,7 +120,7 @@ export default {
     line-height: @header-height;
     .font-dpr(16px);
 }
-.@{name}header-left{
+.@{name}header-left,.@{name}header-right{
     float: left;
     display: flex;
     flex-direction: row;
@@ -135,10 +135,13 @@ export default {
             opacity: 0.5;
         }
     }
-    a,span{
+    a,span,i{
         .font-dpr(14px);
         &:active{
             opacity: 0.5;
+        }
+        &.iconfont{
+            .font-dpr(24px);
         }
     }
     &-text{

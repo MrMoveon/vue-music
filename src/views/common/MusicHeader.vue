@@ -1,15 +1,17 @@
 <template>
     <div class="music-header">
         <mui-header title="音乐馆" fixed tabs>
+            
             <router-link :to="{name:'Music',query:{'slidebar':true}}" slot="left" tag="span">
-                <img class="icon-img" src="../../assets/images/top_tab_more_selected.png" alt="">
+                 <span class="iconfont icon-caidan"></span>
             </router-link>
             <div class="mui-header-tabs" slot="middle">
                 <router-link :to="{name:'Me'}" tag='a' class="mui-header-tabs-item" replace>我的</router-link>
                 <router-link :to="{name:'Music'}" tag='a' class="mui-header-tabs-item" replace>音乐馆</router-link>
                 <router-link :to="{name:'Found'}" tag='a' class="mui-header-tabs-item" replace>发现</router-link>
             </div>
-            <img class="icon-img" slot="right" src="../../assets/images/top_tab_mymusic_selected.png" alt=""  @click="CHANGE_SEARCH_STATUS(true)">
+            <span class="iconfont icon-more_light" slot="right"></span>
+            
         </mui-header>
         <music-top-search :class="{'is-hide':$store.state.app.searchStatus}"></music-top-search>
     </div>

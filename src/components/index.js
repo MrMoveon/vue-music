@@ -8,6 +8,7 @@ import ScrollView from './scrollView/ScrollView.vue';
 import ScrollViewItem from './scrollView/ScrollViewItem.vue';
 
 import Cell from './cell/Cell.vue';
+import MediaCell from './cell/MediaCell.vue';
 const install=(Vue)=>{
     Vue.component('mui-header',Header);
 
@@ -18,6 +19,7 @@ const install=(Vue)=>{
     Vue.component('mui-scroll-view-item',ScrollViewItem);
 
     Vue.component('mui-cell',Cell);
+    Vue.component('mui-media-cell',MediaCell);
 }
 export {
     Header,
@@ -25,7 +27,8 @@ export {
     SlideItem,
     ScrollView,
     ScrollViewItem,
-    Cell
+    Cell,
+    MediaCell
 }
 
 export default install;

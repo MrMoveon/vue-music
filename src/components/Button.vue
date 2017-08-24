@@ -6,7 +6,7 @@
 
 <script>
 /**
- * m-button
+ * mui-button
  * @desc 按钮
  * @param {(type|number)} [type=default] - 显示类型，传入类型名，可选 `primary`,`danger`,`warning`, `success`
  * @param {string} size - 尺寸，可选 `noraml`,`large`
@@ -15,10 +15,10 @@
  * @param {Boolean} disabled - 禁用按钮 
  * @example
  *
- * <m-button type="primary">按钮</m-button>
- * <m-button type="primary" outlined>无底色按钮</m-button>
- * <m-button type="primary" disabled>禁用按钮</m-button>
- * <m-button type="primary" size="large">块级按钮</m-button>
+ * <mui-button type="primary">按钮</mui-button>
+ * <mui-button type="primary" outlined>无底色按钮</mui-button>
+ * <mui-button type="primary" disabled>禁用按钮</mui-button>
+ * <mui-button type="primary" size="large">块级按钮</mui-button>
  */
 export default {
   name: 'Button',
@@ -106,7 +106,7 @@ export default {
         background-color: @color-text-gray-light;
         border-color: @color-text-gray-light;
     }
-    &.m-button--outlined{
+    &.mui-button--outlined{
         color: #fff;
     }
 }
@@ -119,7 +119,7 @@ export default {
         background-color: @color-primary-active;
         border-color: @color-primary-active;
     }
-    &.m-button--outlined{
+    &.mui-button--outlined{
         color: @color-primary-active;
     }
 }
@@ -131,7 +131,7 @@ export default {
         background-color: @color-danger-active;
         border-color: @color-danger-active;
     }
-    &.m-button--outlined{
+    &.mui-button--outlined{
         color: @color-danger-active;
     }
 }
@@ -143,7 +143,7 @@ export default {
         background-color: @color-warning-active;
         border-color: @color-warning-active;
     }
-    &.m-button--outlined{
+    &.mui-button--outlined{
         color: @color-warning-active;
     }
 }
@@ -155,7 +155,7 @@ export default {
         background-color: @color-success-active;
         border-color: @color-success-active;
     }
-    &.m-button--outlined{
+    &.mui-button--outlined{
         color: @color-success-active;
     }
 }
@@ -172,9 +172,9 @@ export default {
     display: block;
     .font-dpr(18px);
     width: 100%;
-    padding: 11px 10px;
+    padding: 11/@rem 10/@rem;
     .font-dpr(16px);
-    margin-bottom: 10px;
+    margin-bottom: 10/@rem;
     .iconfont{
        .font-dpr(16px);
     }

@@ -1,6 +1,8 @@
 
 import Header from './Header.vue';
 import Button from './Button.vue';
+import Icon from './Icon.vue';
+import Spinner from './spinner/Spinner.vue';
 
 import Slide from './slide/Slide.vue';
 import SlideItem from './slide/SlideItem.vue';
@@ -13,6 +15,8 @@ import MediaCell from './cell/MediaCell.vue';
 const install=(Vue)=>{
     Vue.component('mui-header',Header);
     Vue.component('mui-button',Button);
+    Vue.component('mui-icon',Icon);
+    Vue.component('mui-spinner',Spinner);
 
     Vue.component('mui-slide',Slide);
     Vue.component('mui-slide-item',SlideItem);
@@ -26,6 +30,8 @@ const install=(Vue)=>{
 export {
     Header,
     Button,
+    Icon,
+    Spinner,
     Slide,
     SlideItem,
     ScrollView,

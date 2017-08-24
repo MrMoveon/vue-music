@@ -16,7 +16,7 @@
         </div>
         <div class="me-login-btn" v-else>
             <p>登录听歌，加速QQ等级</p>
-            <a class="btn" href="#">立即登录</a>
+            <a class="btn" @click="goLogin">立即登录</a>
         </div>
         
     </div>
@@ -24,7 +24,12 @@
 
 <script>
 export default {
-    name: 'MeLogin'
+    name: 'MeLogin',
+    methods:{
+        goLogin(){
+            this.$store.commit('CHANGE_LOGINVIEW_STATUS',true)
+        }
+    }
 }
 </script>
 

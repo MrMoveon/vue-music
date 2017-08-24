@@ -5,7 +5,9 @@
       <router-view></router-view>
     </keep-alive>
     <router-view v-else></router-view>
-    <music-login v-if="isLogin"></music-login>
+    <transition :name="loginTransition">
+      <music-login v-if="loginViewVisibel"></music-login>
+    </transition>
   </div>
 </template>
 
@@ -21,7 +23,9 @@ export default {
   },
   computed:{
     ...mapGetters([
-      'isLogin'
+      'isLogin',
+      'loginViewVisibel',
+      'loginTransition'
       ])
   }
 }

@@ -30,3 +30,14 @@
   -webkit-transform: translate(-50px, 0);
   transform: translate(-50px, 0);
 }
+//上下移动动画
+.slide-top-enter, .slide-bottom-leave-active {
+  opacity: 0;
+  -webkit-transform: translate(0, 100%);
+  transform: translate(0, 100%);
+}
+.slide-top-leave-active, .slide-bottom-enter {
+  opacity: 0;
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+}

@@ -8,7 +8,7 @@
                 <mui-scroll-view-item v-for="(item,index) in songData" :key='index'>
                     <a href="javascript:;">
                         <img v-lazy="item.url" alt="">
-                        <span>{{item.album_name}}</span>
+                        <span>{{item.album_name | substring}}</span>
                     </a>
                 </mui-scroll-view-item>
             </mui-scroll-view>
@@ -28,7 +28,16 @@ export default {
             }
         }
     },
-   
+    filters:{
+        // 截取字符串
+        substring(val){
+            if(val.length>22){
+                return val.substring(0,22)+'...'
+            }
+            return val
+            
+        }
+    },
     computed:{
         songData(){
             return this.setSongUrl(this.newSong)

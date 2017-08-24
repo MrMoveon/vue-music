@@ -39,13 +39,7 @@ router.beforeEach((to, from, next) => {
   }else{
     store.commit('CHANGE_SEARCH_STATUS',true)
   }
-  // 如果为登录界面返回，设置登录界面返回的过渡动画，并改变登录界面的显示
-  if(from.query.view==='login'){
-    store.commit('CHANGE_LOGINTRANSTION','slide-bottom')
-    setTimeout(()=>{
-      store.commit('CHANGE_LOGINVIEW_STATUS',false)
-    },20)
-  }
+  
   next()
 })
 

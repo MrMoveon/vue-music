@@ -61,7 +61,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         padding: 0 30/@rem;
-        border-bottom:12/@rem solid #f4f4f4;
+        border-bottom:24/@rem solid #f4f4f4;
         .info {
             display: flex;
             flex-direction: row;

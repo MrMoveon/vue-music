@@ -69,6 +69,7 @@ export default {
         display: flex;
         flex-direction: row;
         flex-wrap:wrap;
+        padding-bottom:20/@rem;
     }
     .me-menu-list-item {
         width: 33.3%;
@@ -77,14 +78,15 @@ export default {
         justify-content: center;
         align-items: center;
         text-align:center;
-        padding-top:10/@rem;
+        padding-top:20/@rem;
         a{
             display: block;
         }
         .icon{
             display: block;
-            width: 100/@rem;
-            height: 100/@rem;
+            width: 80/@rem;
+            height: 80/@rem;
+            margin:0 auto;
             overflow: hidden;
             img{
                 display: block;
@@ -99,7 +101,6 @@ export default {
              display: block;
              .font-dpr(10px);
              color:#999;
-             padding-bottom:10/@rem;
         }
     }
 }

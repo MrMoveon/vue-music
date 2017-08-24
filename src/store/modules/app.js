@@ -4,7 +4,8 @@ const app={
         searchStatus:false,         //顶部搜索的状态
         isLogin:false,              //判断是否登录
         loginViewVisibel:false,     //登录界面显示状态
-        loginTransition:'slide-top' //登录的过渡动画
+        loginTransition:'slide-top', //登录的过渡动画
+        mainTransition:'slide-left'
     },
     mutations:{
         [types.CHANGE_SEARCH_STATUS](state,val){
@@ -18,6 +19,9 @@ const app={
         },
         [types.CHANGE_LOGINTRANSTION](state,val){
             state.loginTransition=val
+        },
+        [types.CHANGE_MAINTRANSTION](state,val){
+            state.mainTransition=val
         }
     },
     actions:{

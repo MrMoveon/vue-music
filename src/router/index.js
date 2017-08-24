@@ -24,7 +24,8 @@ export default new Router({
       name: 'Music',
       component: Music,
       meta:{
-        cache:true
+        cache:true,
+        tab:2
       }
     },
     {
@@ -32,7 +33,8 @@ export default new Router({
       name: 'Me',
       component: Me,
       meta:{
-        cache:true
+        cache:true,
+        tab:1
       }
     },
     {
@@ -40,7 +42,8 @@ export default new Router({
       name: 'Found',
       component: Found,
       meta:{
-        cache:true
+        cache:true,
+        tab:3
       }
     },
     {

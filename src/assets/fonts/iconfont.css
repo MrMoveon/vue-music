@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1503537432350'); /* IE9*/
-  src: url('iconfont.eot?t=1503537432350#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1503537432350') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1503537432350') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1503537432350#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1503556099638'); /* IE9*/
+  src: url('iconfont.eot?t=1503556099638#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1503556099638') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1503556099638') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1503556099638#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -136,6 +136,8 @@
 .icon-more_android_light:before { content: "\e7e3"; }
 
 .icon-more_light:before { content: "\e7e4"; }
+
+.icon-yinyue:before { content: "\e88e"; }
 
 .icon-huidaodingbu:before { content: "\e88d"; }
 

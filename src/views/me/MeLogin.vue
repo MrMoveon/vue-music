@@ -27,6 +27,8 @@ export default {
     name: 'MeLogin',
     methods:{
         goLogin(){
+            this.$router.push({name:'Me',query:{view:'login'}})
+            this.$store.commit('CHANGE_LOGINTRANSTION','slide-top')
             this.$store.commit('CHANGE_LOGINVIEW_STATUS',true)
         }
     }
@@ -53,7 +55,7 @@ export default {
         }
     }
     .me-login-info {
-        height: 120/@rem;
+        height: 150/@rem;
         display: flex;
         flex-direction: row;
         justify-content: space-between;

@@ -107,5 +107,6 @@ export default {
 @import '../../assets/less/mixins.less';
 .mui-scrollview {
     width: 10rem;
+    height: 100%;
 }
 </style>

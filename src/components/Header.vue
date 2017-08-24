@@ -144,7 +144,7 @@ export default {
             opacity: 0.5;
         }
         &.iconfont{
-            .font-dpr(24px);
+            .font-dpr(20px);
         }
     }
     &-text{

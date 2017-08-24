@@ -2,7 +2,7 @@
     <div class="mui-media-list" @click="handleClick">
         <div class="mui-media-list-left"  :class="{'is-right':align==='right'}">
             <div class="mui-thumb" v-if="img" :class="{'radius':radius}">
-                <img :src="img">
+                <img v-lazy="img">
             </div>
             <div class="mui-text">
                 <span class="title mui-ellipsis-1" v-if="title" v-text="title"></span>

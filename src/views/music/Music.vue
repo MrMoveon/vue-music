@@ -40,6 +40,9 @@ export default {
         this.loadData()
         this.loadAll()
     },
+    deactivated(){
+        if(this.timer) clearInterval(this.timer);
+    },
     methods: {
         loadData() {
             getSilde().then((res) => {

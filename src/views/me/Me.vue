@@ -6,16 +6,17 @@
                 <me-login></me-login>
                 <me-menu></me-menu>
                 <div class="guess-you-like">
-                <mui-media-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" align="right" title="猜您喜欢" desc="来听听和【不爱你】一样好听的歌曲吧">
-                </mui-media-cell>
+                    <mui-media-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" align="right" title="猜您喜欢" desc="来听听和【不爱你】一样好听的歌曲吧">
+                    </mui-media-cell>
                 </div>
-                <mui-cell title="我的歌单" value="10">
-                </mui-cell>
-                <mui-media-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" title="New" desc="56首">
-                </mui-media-cell>
-                <mui-media-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" title="好听的" desc="32首">
-                </mui-media-cell>
-               
+                <div class="me-playlist">
+                    <mui-cell title="我的歌单" value="10">
+                    </mui-cell>
+                    <mui-media-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" title="New" desc="56首">
+                    </mui-media-cell>
+                    <mui-media-cell :img="require('../../assets/images/lyric_poster_default_bg6_small.jpg')" title="好听的" desc="32首">
+                    </mui-media-cell>
+                </div>
             </mui-scroll-view-item>
         </mui-scroll-view>
 

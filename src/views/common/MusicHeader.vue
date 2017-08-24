@@ -3,15 +3,14 @@
         <mui-header title="音乐馆" fixed tabs color="green">
             
             <router-link :to="{name:'Music',query:{'slidebar':true}}" slot="left" tag="span">
-                 <span class="iconfont icon-caidan"></span>
+                 <mui-icon name='caidan'></mui-icon>
             </router-link>
             <div class="mui-header-tabs" slot="middle">
                 <router-link :to="{name:'Me'}" tag='a' class="mui-header-tabs-item" replace>我的</router-link>
                 <router-link :to="{name:'Music'}" tag='a' class="mui-header-tabs-item" replace>音乐馆</router-link>
                 <router-link :to="{name:'Found'}" tag='a' class="mui-header-tabs-item" replace>发现</router-link>
             </div>
-            <span class="iconfont icon-more_light" slot="right"></span>
-            
+            <mui-icon name='more_light' slot="right"></mui-icon>
         </mui-header>
         <music-top-search :class="{'is-hide':$store.state.app.searchStatus}"></music-top-search>
     </div>

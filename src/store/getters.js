@@ -7,6 +7,9 @@ const getters={
     },
     loginTransition(state){
         return state.app.loginTransition
+    },
+    mainTransition(state){
+        return state.app.mainTransition
     }
 }
 

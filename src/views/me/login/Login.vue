@@ -28,6 +28,7 @@ export default {
 				Indicator.close();
 				this.$store.commit('CHANGE_LOGINTRANSTION','slide-bottom')
 				setTimeout(()=>{
+					this.$router.replace({name:'Me'})
 					this.$store.commit('CHANGE_LOGINVIEW_STATUS',false)
 					this.$store.commit('CHANGE_LOGIN_STATUS',true)
 				},20)

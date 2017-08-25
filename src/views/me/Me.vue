@@ -19,11 +19,11 @@
                 </div>
             </mui-scroll-view-item>
         </mui-scroll-view>
-
     </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import MeLogin from './MeLogin'
 import MeMenu from './MeMenu'
 export default {
@@ -32,6 +32,11 @@ export default {
         return {
 
         }
+    },
+    computed:{
+        ...mapGetters[
+            'loginTransition'
+        ]
     },
     watch:{
         "$route"(to,from){

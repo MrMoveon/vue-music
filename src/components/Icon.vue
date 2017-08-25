@@ -1,5 +1,5 @@
 <template>
-    <span class="iconfont" :class="'icon-'+name">
+    <span class="iconfont" :class="'icon-'+name" @click="handleClick">
     </span>
 </template>
 
@@ -8,6 +8,11 @@ export default {
     name: "Icon",
     props: {
         name: String
+    },
+    methods:{
+        handleClick(ev){
+            this.$emit('click',ev)
+        }
     }
 }
 </script>

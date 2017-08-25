@@ -1,9 +1,9 @@
 <template>
     <div class="music-menu">
-        <div class="music-menu-item">
+        <router-link :to="{name:'Singer'}" tag="a" class="music-menu-item">
             <img src="../../assets/images/icon-geshou.png" alt="">
             歌手
-        </div>
+        </router-link>
         <div class="music-menu-item">
             <img src="../../assets/images/icon-fenlei.png" alt="">
             分类

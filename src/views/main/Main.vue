@@ -1,5 +1,5 @@
 <template>
-  <div class="mui-page-group mui-page">
+  <div class="mui-page">
     <music-header></music-header>
     <transition :name="mainTransition">
       <keep-alive>

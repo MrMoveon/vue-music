@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="mui-page-group">
+  <div id="app" class="mui-page">
     <transition :name="transitionName">
       <keep-alive>
         <router-view></router-view>

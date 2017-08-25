@@ -176,5 +176,31 @@ export default {
     }
     
 }
-
+.@{name}header-tabs-title{
+    height: @header-height;
+    font-size: 0;
+    padding-top:10/@rem;
+    &-item{
+        display:inline-block;
+        width: 122/@rem;
+        height: @header-height - 28/@rem;
+        line-height: @header-height - 28/@rem;
+        background:darken(@color-primary-active, 10%);
+        .font-dpr(15px);
+        border-width: 1px;
+        border-style:solid;
+        border-color:darken(@color-primary-active, 10%);
+        &:first-of-type{
+            border-radius:6/@rem 0 0 6/@rem;
+        }
+        &:last-of-type{
+            border-radius:0 6/@rem 6/@rem 0;
+        }
+    }
+    .active{
+        background: #fff;
+        color: darken(@color-primary-active, 10%);
+        border-color:#fff;
+    }
+}
 </style>

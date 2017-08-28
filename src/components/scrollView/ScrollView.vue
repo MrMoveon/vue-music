@@ -91,11 +91,45 @@ export default {
         getCurrentObj(){
             return this['scrollview'+this.name];
         },
+        //获取当前项的索引
+        getActiveIndex(){
+            return this['scrollview'+this.name].activeIndex
+        },
+        //是否在过渡
+        getAnimating(){
+            return this['scrollview'+this.name].animating
+        },
         //父组件执行回调
         done(callback){
             var vm=this;
             if(callback) callback || callback();
             return false;
+        },
+        slideTo(index, speed, runCallbacks){
+            var _index=index;
+            var _speed;
+            var _callback;
+            /**
+             * 
+             *  mySwiper.slideTo(index, speed, runCallbacks)
+             *  Swiper切换到指定slide。
+             *  index:必选，num，指定将要切换到的slide的索引。
+             *  speed:可选，num(单位ms)，切换速度
+             *  runCallbacks:可选，boolean，设置为false时不会触发onSlideChange回调函数。
+             */
+            if(arguments.length==1){
+                _speed=0;
+                _callback=false;
+            }    
+            if(arguments.length==2){
+                _speed=speed;
+                _callback=false;
+            }    
+             if(arguments.length==3){
+                _speed=speed;
+                _callback=runCallbacks;
+            } 
+            this['scrollview'+this.name].slideTo(_index, _speed, _callback);
         }
        
     }

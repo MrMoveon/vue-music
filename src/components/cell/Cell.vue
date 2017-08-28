@@ -2,7 +2,7 @@
     <div class="mui-list" @click="handleClick">
         <div class="mui-list-left">
             <div class="mui-thumb" v-if="!icon && img" :class="{'radius':radius}">
-                <img :src="img">
+                <img v-lazy="img">
             </div>
             <div class="mui-icon" v-if="icon">
                 <span class="iconfont" :class="icon" :style="{color:iconColor}"></span>

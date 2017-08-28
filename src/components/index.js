@@ -3,6 +3,7 @@ import Header from './Header.vue';
 import Button from './Button.vue';
 import Icon from './Icon.vue';
 import Spinner from './spinner/Spinner.vue';
+import Loading from './loading/Loading.vue';
 
 import Slide from './slide/Slide.vue';
 import SlideItem from './slide/SlideItem.vue';
@@ -17,6 +18,7 @@ const install=(Vue)=>{
     Vue.component('mui-button',Button);
     Vue.component('mui-icon',Icon);
     Vue.component('mui-spinner',Spinner);
+    Vue.component('mui-loading',Loading);
 
     Vue.component('mui-slide',Slide);
     Vue.component('mui-slide-item',SlideItem);
@@ -32,6 +34,7 @@ export {
     Button,
     Icon,
     Spinner,
+    Loading,
     Slide,
     SlideItem,
     ScrollView,

@@ -19,3 +19,13 @@ export function hasClass(elem, className) {
       return new RegExp('(^| )' + className + '( |$)', 'gi').test(elem.className);
     }
   }
+
+export function getData(el,name,val){
+  //data-index=1
+  if(arguments.length===2){
+    return el.getAttribute('data-'+name) ? el.getAttribute('data-'+name) : ''
+  }
+  if(arguments.length===3){
+    return el.getAttribute('data-'+name,val)
+  }
+}

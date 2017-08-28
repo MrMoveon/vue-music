@@ -1,7 +1,11 @@
 <template>
     <div class="mui-page music-found">
+        
         <mui-scroll-view  ref="foundScrollV" name="found-scroll-v" direction="vertical" slidesPerView="auto" :scrollbar="null">
-            <mui-scroll-view-item style="height:auto;" class="mui-container">
+            <mui-scroll-view-item style="height:auto;" class="mui-container mui-container-flex"  v-if="!foundData.length">
+                <mui-loading direction="column"></mui-loading>
+            </mui-scroll-view-item>
+            <mui-scroll-view-item style="height:auto;" class="mui-container" v-else>
                 <mui-media-cell v-for="(item,index) in foundData" :key="index" align='right' :img="item.front_pic">
                     <div class="other-text" slot="text">
                         <div class="otitle  mui-ellipsis-2">{{item.title}}</div>
@@ -38,7 +42,7 @@ export default {
                     this.$nextTick(()=>{
                         this.$refs.foundScrollV.update()
                         //执行子组件的回调函数
-                        this.$refs.foundScrollV.done(this.touchmove())
+                        this.$refs.foundScrollV.done(this.scrolling())
                     })
                 }
             })
@@ -46,7 +50,7 @@ export default {
         /**
          * 获取 foundScrollV 的 swiper对象，通过TouchStart，TouchMove来获取偏移值判断方向，设置顶部搜索的显示隐藏
          */
-        touchmove() {
+        scrolling() {
             // 获取 foundScrollV 的 swiper对象
             var vm = this;
             var scroll = vm.$refs.foundScrollV.getCurrentObj()
@@ -71,6 +75,15 @@ export default {
                 } else {
                     vm.direction = 'up'
                 }
+            })
+            scroll.on('TouchEnd', function (swiper, event) {
+                 setTimeout(()=>{
+                     //scrollview是否在滚动
+                    var animating= vm.$refs.foundScrollV.getAnimating();
+                    if(!animating && vm.timer){
+                        clearInterval(vm.timer);
+                    }
+                 },100)
             })
             //滚动结束，清除定时器
             scroll.on('TransitionEnd', function () {
@@ -109,6 +122,7 @@ export default {
         padding-top: (88+75-4)/@rem;
         overflow: initial;
     }
+    
     .mui-media-list{
         .otitle{
             color: #333;

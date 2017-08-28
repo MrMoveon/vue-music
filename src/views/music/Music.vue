@@ -2,7 +2,10 @@
     <div class="mui-page music-home">
 
         <mui-scroll-view class="music-container" ref="musicScrollV" name="music-scroll-v" direction="vertical" slidesPerView="auto" :scrollbar="null">
-            <mui-scroll-view-item style="height:auto">
+             <mui-scroll-view-item style="height:auto;" class="mui-container mui-container-flex"  v-if="!recommend.length">
+                <mui-loading direction="column"></mui-loading>
+            </mui-scroll-view-item>
+            <mui-scroll-view-item style="height:auto" v-else>
                 <div class="mui-container " style="overflow:initial;position:static">
                     <!-- 幻灯片 -->
                     <mui-slide v-if="slideData.length" :autoPlay='3000'>
@@ -37,8 +40,10 @@ export default {
         }
     },
     mounted() {
-        this.loadData()
-        this.loadAll()
+        //this.loadData()
+       setTimeout(()=>{
+            this.loadAll()
+       },20)
     },
     deactivated(){
         if(this.timer) clearInterval(this.timer);
@@ -64,7 +69,7 @@ export default {
                         //执行更新
                         this.$refs.musicScrollV.update();
                         //执行子组件的回调函数
-                        this.$refs.musicScrollV.done(this.touchmove());
+                        this.$refs.musicScrollV.done(this.scrolling());
                     }, 20)
                 })
             })
@@ -72,16 +77,17 @@ export default {
         /**
          * 获取 musicScrollV 的 swiper对象，通过TouchStart，TouchMove来获取偏移值判断方向，设置顶部搜索的显示隐藏
          */
-        touchmove() {
+        scrolling() {
             // 获取 musicScrollV 的 swiper对象
             var vm = this;
             var scroll = vm.$refs.musicScrollV.getCurrentObj()
-
+           
             scroll.on('TouchStart', function (swiper, event) {
                 //获取按下的pageY值
                 var touch = event.touches[0]
                 vm.pageY1 = touch.pageY;
                 //通过定时器来获取滑动中translate的值，并判断顶部搜索框的隐藏显示
+                
                 clearInterval(vm.timer);
                 vm.timer = setInterval(() => {
                     vm.searchVisibel(scroll)
@@ -98,8 +104,18 @@ export default {
                     vm.direction = 'up'
                 }
             })
+            scroll.on('TouchEnd', function (swiper, event) {
+                 setTimeout(()=>{
+                     //scrollview是否在滚动
+                    var animating= vm.$refs.musicScrollV.getAnimating();
+                    if(!animating && vm.timer){
+                        clearInterval(vm.timer);
+                    }
+                 },100)
+            })
             //滚动结束，清除定时器
             scroll.on('TransitionEnd', function () {
+             
                 clearInterval(vm.timer);
             })
         },

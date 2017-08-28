@@ -18,7 +18,7 @@
 
                 <div class="singel-label">{{item.label}}</div>
 
-                <mui-cell radius :arrow='false' :img="list.url" :title="list.Fsinger_name" v-for="(list,sindex) in item.list" :key="sindex" >
+                <mui-cell radius :to="{name:'SingerDetail'}" :arrow='false' :img="list.url" :title="list.Fsinger_name" v-for="(list,sindex) in item.list" :key="sindex" >
                 </mui-cell>
                 
             </mui-scroll-view-item>

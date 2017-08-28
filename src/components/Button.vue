@@ -111,7 +111,7 @@ export default {
     }
 }
  // background
-.@{name}button--primary{
+.@{name}button--primary,.@{name}button--blue{
     background-color: @color-primary;
     border-color: @color-primary;
     color:#fff;
@@ -123,7 +123,7 @@ export default {
         color: @color-primary-active;
     }
 }
-.@{name}button--danger{
+.@{name}button--danger,.@{name}button--red{
     background-color: @color-danger;
     border-color: @color-danger;
      color:#fff;
@@ -135,7 +135,7 @@ export default {
         color: @color-danger-active;
     }
 }
-.@{name}button--warning{
+.@{name}button--warning,.@{name}button--org{
     background-color: @color-warning;
     border-color: @color-warning;
      color:#fff;
@@ -147,7 +147,7 @@ export default {
         color: @color-warning-active;
     }
 }
-.@{name}button--success{
+.@{name}button--success,.@{name}button--green{
     background-color: @color-success;
     border-color: @color-success;
      color:#fff;
@@ -157,6 +157,18 @@ export default {
     }
     &.mui-button--outlined{
         color: @color-success-active;
+    }
+}
+.@{name}button--white{
+    background-color: #fff;
+    border-color: #fff;
+     color:#fff;
+    &:not(.is-disabled):active{
+        background-color: #fff;
+        border-color: #333;
+    }
+    &.mui-button--outlined{
+        color: #fff;
     }
 }
 // size

@@ -99,6 +99,10 @@ export default {
         getAnimating(){
             return this['scrollview'+this.name].animating
         },
+        //获取wrapper位移值
+        getWrapperTranslate(){
+            return this['scrollview'+this.name].getWrapperTranslate()
+        },
         //父组件执行回调
         done(callback){
             var vm=this;

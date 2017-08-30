@@ -10,6 +10,9 @@ const getters={
     },
     mainTransition(state){
         return state.app.mainTransition
+    },
+    focusSinger(state){
+        return state.app.focusSinger
     }
 }
 

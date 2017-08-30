@@ -2,7 +2,7 @@
     <div class="mui-page music-home">
 
         <mui-scroll-view class="music-container" ref="musicScrollV" name="music-scroll-v" direction="vertical" slidesPerView="auto" :scrollbar="null">
-             <mui-scroll-view-item style="height:auto;" class="mui-container mui-container-flex"  v-if="!recommend.length">
+             <mui-scroll-view-item style="height:auto;" class="mui-container mui-container-flex"  v-if="!isCompated">
                 <mui-loading direction="column"></mui-loading>
             </mui-scroll-view-item>
             <mui-scroll-view-item style="height:auto" v-else>
@@ -34,6 +34,7 @@ export default {
     name: 'Musci',
     data() {
         return {
+            isCompated:false,
             slideData: [],
             newSong: [],
             recommend: []
@@ -64,14 +65,19 @@ export default {
                 if (results[2].code === 0) {
                     this.recommend = results[2].data.list
                 }
-                this.$nextTick(() => {
-                    setTimeout(() => {
-                        //执行更新
-                        this.$refs.musicScrollV.update();
-                        //执行子组件的回调函数
-                        this.$refs.musicScrollV.done(this.scrolling());
-                    }, 20)
-                })
+                 setTimeout(() => {
+                        this.isCompated=true
+                        this.$nextTick(() => {
+                        
+                            setTimeout(()=>{
+                                //执行更新
+                                this.$refs.musicScrollV.update();
+                                //执行子组件的回调函数
+                                this.$refs.musicScrollV.done(this.scrolling());
+                            }, 20);
+                        
+                        })
+                 }, 1000)
             })
         },
         /**

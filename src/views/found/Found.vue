@@ -2,7 +2,7 @@
     <div class="mui-page music-found">
         
         <mui-scroll-view  ref="foundScrollV" name="found-scroll-v" direction="vertical" slidesPerView="auto" :scrollbar="null">
-            <mui-scroll-view-item style="height:auto;" class="mui-container mui-container-flex"  v-if="!foundData.length">
+            <mui-scroll-view-item style="height:auto;" class="mui-container mui-container-flex"  v-if="!isCompated">
                 <mui-loading direction="column"></mui-loading>
             </mui-scroll-view-item>
             <mui-scroll-view-item style="height:auto;" class="mui-container" v-else>
@@ -25,6 +25,7 @@ export default {
     name: 'Found',
     data() {
         return {
+            isCompated:false,
             foundData:[]
         }
     },
@@ -39,11 +40,20 @@ export default {
             getFound().then(res=>{
                 if(res.data.code===0){
                     this.foundData=res.data.magzine.data.v_magzine
-                    this.$nextTick(()=>{
-                        this.$refs.foundScrollV.update()
-                        //执行子组件的回调函数
-                        this.$refs.foundScrollV.done(this.scrolling())
-                    })
+                     setTimeout(() => {
+                            this.isCompated=true
+                            this.$nextTick(() => {
+                            
+                                setTimeout(()=>{
+                                    //执行更新
+                                    this.$refs.foundScrollV.update()
+                                    //执行子组件的回调函数
+                                    this.$refs.foundScrollV.done(this.scrolling())
+                                }, 20);
+                            
+                            })
+                    }, 1000)
+                   
                 }
             })
         },

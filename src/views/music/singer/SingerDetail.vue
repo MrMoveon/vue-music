@@ -11,8 +11,10 @@
             </div>
         </div>
         <div class="tool-btn" ref="toolBtn">
-            <mui-button outlined type="white"  @click="handleFocus">
+            <mui-button outlined type="white"  @click="handleFocus" v-if="isFocus===-1">
                 <mui-icon name="staro"></mui-icon>关注</mui-button>
+            <mui-button  type="green"  @click="cancelFocus" v-else>
+                <mui-icon name="star"></mui-icon>已关注</mui-button>    
             <mui-button outlined type="white">
                 <mui-icon name="customerservice"></mui-icon>随机播放全部</mui-button>
         </div>
@@ -27,14 +29,17 @@
 </template>
 
 <script>
+import _ from 'underscore'
 import tips from '@/mixins/tips'
 import back from '@/mixins/back'
+import Indicator from '@/components/indicator'
 import {getSingerDetail} from '@/api/music'
 export default {
     name: 'SingerDetail',
     mixins:[tips,back],
     data() {
         return {
+            isComplate:false,
             singer:{
                 Fsinger_name:'',
                 url:'',
@@ -42,22 +47,62 @@ export default {
             }
         }
     },
-    
     mounted() {
-        
-        setTimeout(() => {
-            this.success('登录成')
-            this.loadData()
-        }, 20);
+        // setTimeout(() => {
+        //     this.loadData()
+        // }, 20);
     },
     activated(){
-         setTimeout(() => {
-            this.loadData()
-        }, 20);
+        //  setTimeout(() => {
+        //     this.loadData()
+        // }, 20);
+    },
+    beforeRouteEnter (to, from, next){
+        Indicator.open({
+				text:'数据加载中...',
+				spinnerType:'default',
+			})
+        getSingerDetail(to.params.id).then(res=>{
+
+                if(res.code===0){
+                    next(vm => {
+                        vm.isComplate=false
+                        vm.singer={
+                            Fsinger_name:res.data.singer_name,
+                            Fsinger_mid:res.data.singer_mid,
+                            url:`https://y.gtimg.cn/music/photo_new/T001R300x300M000${res.data.singer_mid}.jpg?max_age=2592000`,
+                            singerSong:res.data.list
+                        }
+                        setTimeout(()=> {
+                            vm.isComplate=true
+                            Indicator.close()
+                        }, 20);
+                      
+                    })
+                    
+                   
+                }else{
+                     next(false)
+                }
+            })
+    },
+    computed:{
+        isFocus(){
+            return _.findIndex(this.$store.getters.focusSinger,{Fsinger_name:this.singer.Fsinger_name})
+        }
+    },
+    watch:{
+        isComplate(val){
+            if(val===true){
+                this.$refs.singerDetailScrollV.update()
+                this.$refs.singerDetailScrollV.done(this.scrolling())
+            }
+        }
     },
     methods: {
         loadData() {
             getSingerDetail(this.$route.params.id).then(res=>{
+            
                 console.log(res)
                 if(res.code===0){
                     this.singer={
@@ -70,8 +115,6 @@ export default {
                         this.$refs.singerDetailScrollV.update()
                          this.$refs.singerDetailScrollV.done(this.scrolling())
                     })
-                    
-                    
                 }
             })
             
@@ -96,6 +139,9 @@ export default {
                     scale += translate / bgHeight
                     bg.style.transform = `scale(${scale})`
                     toolBtn.style.transform = `translate(0,${translate + 'px'}`
+                    toolBtn.style.zIndex=10
+                }else{
+                    toolBtn.style.zIndex=8
                 }
             })
             scroll.on('TouchEnd', function(swiper, event) {
@@ -110,19 +156,29 @@ export default {
         descript(item){
             return `${item.singerName} .  ${item.company}`
         },
+        //关注歌手
         handleFocus(){
+            Indicator.open({
+				text:'关注中...',
+				spinnerType:'default',
+			})
             this.$store.dispatch('focusSinger',{
                 Fsinger_name:this.singer.Fsinger_name,
                 Fsinger_mid:this.singer.Fsinger_mid,
                 url:this.singer.url
             }).then((resolve)=>{
-                this.$Toast('关注成功')
-                
+                Indicator.close()
             },(reject)=>{
-              this.$router.push({name:'SingerDetail',query:{view:'login'}})
+                Indicator.close()
+                this.$router.push({name:'SingerDetail',query:{view:'login'}})
             })
+        },
+        // 取消关注
+        cancelFocus(){
+            var index=this.isFocus
+            this.$store.dispatch('cancelSinger',{Fsinger_name:this.singer.Fsinger_name})
         }
-       
+        
     }
 }
 </script>

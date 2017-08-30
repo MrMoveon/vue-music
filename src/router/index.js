@@ -5,6 +5,8 @@ import Main from '@/views/main/Main'
 
 import Music from '@/views/music/Music'
 import Singer from '@/views/music/singer/Singer'
+import SingerAll from '@/views/music/singer/SingerAll'
+import SingerFocus from '@/views/music/singer/SingerFocus'
 import SingerDetail from '@/views/music/singer/SingerDetail'
 
 import Found from '@/views/found/Found'
@@ -52,8 +54,27 @@ export default new Router({
         }, {
             path: '/main/music/singer',
             name: 'Singer',
-            component: Singer
-        }, {
+            component: Singer,
+            redirect:'/main/music/singer/all',
+            children:[
+                {
+                    path: 'all',
+                    name: 'SingerAll',
+                    component: SingerAll
+                },
+                {
+                    path: 'focus',
+                    name: 'SingerFocus',
+                    component: SingerFocus
+                }
+            ]
+        },
+        // {
+        //     path: '/main/music/singer/focus',
+        //     name: 'SingerFocus',
+        //     component: SingerFocus
+        // },
+        {
             path: '/main/music/singer/detail/:id',
             name: 'SingerDetail',
             component: SingerDetail

@@ -24,7 +24,10 @@ export default {
     }
   },
   mounted(){
-    this.checkLogin()
+	  setTimeout(()=> {
+		  this.checkLogin()
+	  }, 20);
+    
   },
   components: {
     MusicHeader,
@@ -48,9 +51,11 @@ export default {
   methods:{
     checkLogin(){
         this.$store.dispatch('checkLogin').then((resolve)=>{
-			this.$store.commit('CHANGE_LOGIN_STATUS',true)
+			
+			//初始化数据
+			this.$store.dispatch('initData')
 		},(reject)=>{
-			console.log(reject)
+			console.log('没有登录')
 		})
     }
   }

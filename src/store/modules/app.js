@@ -28,29 +28,43 @@ const app={
             state.mainTransition=val
         },
         [types.SET_FOCUS_SINGER](state,val){
-            // if(status==='cancel'){
-            //     state.focusSinger.forEach(function(element,index) {
-            //         if(element.Fsinger_name===val){
-            //             // 删除
-            //             return state.focusSinger.splice(index,1)
-            //         }
-            //     }, this);
-            //     return
-            // }
+            var index=_.findIndex(state.focusSinger,val)
+            if(index!==-1) return
             state.focusSinger.push(val)
+        },
+        [types.CONCAT_FOCUS_SINGER](state,val){
+            state.focusSinger=state.focusSinger.concat(val)
+        },
+        [types.SET_CANCEL_FOCUS](state,val){
+            var index=_.findIndex(state.focusSinger,val)
+            return state.focusSinger.splice(index,1)
         }
     },
     actions:{
+        initData({commit,state}){
+            //设置为登录
+            commit(types.CHANGE_LOGIN_STATUS,true)
+            // 设置关注的歌手
+            var focusSinger=JSON.parse(storage.get('focusSinger'))
+            if(focusSinger){
+                console.log(focusSinger)
+                commit(types.CONCAT_FOCUS_SINGER,focusSinger)
+            }
+           
+            
+            
+        },
         //关注歌手
         focusSinger({dispatch,commit,state},val){
             
             return new Promise((resolve,reject)=>{
                 var status=state.isLogin
                 if(status){
-                    commit(types.SET_FOCUS_SINGER,val)
                     // 
                     setTimeout(()=> {
+                        commit(types.SET_FOCUS_SINGER,val)
                         resolve(status)
+                        storage.set('focusSinger',JSON.stringify(state.focusSinger))
                     }, 1000);
                     
                 }else{
@@ -60,6 +74,13 @@ const app={
             })
             
             
+        },
+        //取消关注
+        cancelSinger({commit,state},val){
+            commit(types.SET_CANCEL_FOCUS,val)
+            setTimeout(()=> {
+                storage.set('focusSinger',JSON.stringify(state.focusSinger))
+            }, 100);
         },
         //打开页面的时候检测登录
         checkLogin({commit,state}){
@@ -81,6 +102,8 @@ const app={
                     dispatch('loginView',false)
                     //设置登录uid
                     storage.set('uid',1)
+                    //初始化数据
+                    dispatch('initData')
                     resolve(true)
                 }, 1000);
             })

@@ -33,10 +33,12 @@
 </template>
 
 <script>
+import back from '@/mixins/back'
 import {getSinger} from '@/api/music'
 import {getData} from '@/utils/dom'
 export default {
     name:'Singer',
+    mixins:[back],
     data(){
         return {
             currentIndex:0,
@@ -152,9 +154,6 @@ export default {
             scroll.on('TransitionEnd', function () {
                 clearInterval(vm.timer);
             })
-        },
-        back() {
-            this.$router.go(-1)
         }
     }
 }

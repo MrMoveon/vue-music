@@ -13,9 +13,11 @@
 
 <script>
 import Indicator from '../../../components/indicator';
- 
+import tips from '@/mixins/tips'
+import back from '@/mixins/back'
 export default {
-	name:'Login',
+  name:'Login',
+  mixins:[tips,back],
 	methods:{
 		handlelogin(){
 			//加载框
@@ -23,11 +25,12 @@ export default {
 				text:'登录中...',
 				spinnerType:'default',
 			})
-			//登录成功，关闭加载框，改变登录界面的过渡动画，改变登录界面显示状态，改变登录状态
+			//登录成功
       this.$store.dispatch('login').then(resolve=>{
         if(resolve){
-          this.$router.replace({name:'Me'})
-          Indicator.close();
+          Indicator.close()
+          this.success('登录成功')
+          this.back()
         }
       })
 		}

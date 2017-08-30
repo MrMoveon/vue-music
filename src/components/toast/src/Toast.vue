@@ -1,7 +1,8 @@
 <template>
 <transition name="fade">
-  <div class="mui-toast" :class="position?'mui-toast--'+position:''" v-if="visible" :style="{backgroundColor:color,zIndex:tIndex+9999}">
-          <i v-if="icon" :class="icon" style="font-size:40px;display:block"></i>
+  <div class="mui-toast" :class="position?'mui-toast--'+position:''" v-if="visible" :style="[{backgroundColor:color},{zIndex:tIndex+9999},styles]">
+          
+          <mui-icon v-if="icon" :name="icon" style="font-size:40px;display:block"></mui-icon>
           {{msg}}
   </div>
   </transition>
@@ -47,6 +48,7 @@ export default {
         type:String,
         default:''
     },
+    styles:Object,
     visible:{
         type:Boolean,
         default:false
@@ -91,6 +93,7 @@ export default {
     padding:5/@rem 10/@rem;
     color: #fff;
     transition: all 0.3 linear;
+    .font-dpr(12px);
     &--bottom{
         bottom:20/@rem;
     }

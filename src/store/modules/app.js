@@ -1,9 +1,7 @@
 
 import * as types from '../types'
-import Vue from 'vue'
-import Toast from '@/components/toast'
 import storage from '../../utils/storage'
-Vue.use(Toast)
+import _ from 'underscore'
 const app={
     state:{
         searchStatus:false,         //顶部搜索的状态
@@ -56,14 +54,14 @@ const app={
                     }, 1000);
                     
                 }else{
-                    resolve(status)
+                    reject(status)
                 }
                 
             })
             
             
         },
-        // 检测登录
+        //打开页面的时候检测登录
         checkLogin({commit,state}){
             return new Promise((resolve,reject)=>{
                 if(storage.get('uid')){
@@ -72,7 +70,6 @@ const app={
                     reject(false)
                 }
             })
-           // return state.isLogin
         },
         // 登录
         login({dispatch,commit,state}){
@@ -103,6 +100,8 @@ const app={
             }
             
         }
+        
+
     }
 }
 export default app

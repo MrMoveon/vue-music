@@ -27,9 +27,12 @@
 </template>
 
 <script>
+import tips from '@/mixins/tips'
+import back from '@/mixins/back'
 import {getSingerDetail} from '@/api/music'
 export default {
     name: 'SingerDetail',
+    mixins:[tips,back],
     data() {
         return {
             singer:{
@@ -43,6 +46,7 @@ export default {
     mounted() {
         
         setTimeout(() => {
+            this.success('登录成')
             this.loadData()
         }, 20);
     },
@@ -113,14 +117,12 @@ export default {
                 url:this.singer.url
             }).then((resolve)=>{
                 this.$Toast('关注成功')
-            },(reject)=>{
-                this.$Toast('您还没有登录')
                 
+            },(reject)=>{
+              this.$router.push({name:'SingerDetail',query:{view:'login'}})
             })
-        },
-        back() {
-            this.$router.go(-1)
         }
+       
     }
 }
 </script>

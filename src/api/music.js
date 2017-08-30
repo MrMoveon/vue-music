@@ -94,3 +94,27 @@ export function getSinger(){
         })
     })
 }
+export function getSingerDetail(singermid){
+    let url='https://c.y.qq.com/v8/fcg-bin/fcg_v8_singer_album.fcg'
+    let data=Object.assign({},commonParams,{
+        format:"jsonp",
+        platform:"yqq",
+        singermid:singermid,
+        order:"time",
+        begin:0,
+        num:100,
+        g_tk:5381,
+        loginUin:0,
+        hostUin:0,
+        format:"jsonp",
+        notice:0,
+        platform:"yqq",
+        needNewCode:0
+    })
+    
+    return jsonp(url, data, opts).then(res=>{
+        return new Promise((resolve,reject)=>{
+            resolve(res)
+        })
+    })
+}

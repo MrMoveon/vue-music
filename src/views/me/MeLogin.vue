@@ -27,10 +27,9 @@ export default {
     name: 'MeLogin',
     methods:{
         goLogin(){
-            //this.$router.push({name:'Login'})
             this.$router.push({name:'Me',query:{view:'login'}})
-            this.$store.commit('CHANGE_LOGINTRANSTION','slide-top')
-            this.$store.commit('CHANGE_LOGINVIEW_STATUS',true)
+            // this.$store.commit('CHANGE_LOGINTRANSTION','slide-top')
+            // this.$store.commit('CHANGE_LOGINVIEW_STATUS',true)
         }
     }
 }

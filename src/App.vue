@@ -5,6 +5,9 @@
         <router-view></router-view>
       </keep-alive>
     </transition>
+	<transition :name="loginTransition">
+      <music-login v-if="loginViewVisibel"></music-login>
+    </transition>
   </div>
 </template>
 
@@ -12,12 +15,16 @@
 import {mapGetters} from 'vuex'
 import MusicHeader from './views/common/MusicHeader'
 import MusicLogin from './views/me/login/Login'
+
 export default {
   name: 'app',
   data(){
     return {
       transitionName:"slide-left"
     }
+  },
+  mounted(){
+    this.checkLogin()
   },
   components: {
     MusicHeader,
@@ -37,6 +44,15 @@ export default {
       'loginTransition',
       'mainTransition'
       ])
+  },
+  methods:{
+    checkLogin(){
+        this.$store.dispatch('checkLogin').then((resolve)=>{
+			this.$store.commit('CHANGE_LOGIN_STATUS',true)
+		},(reject)=>{
+			console.log(reject)
+		})
+    }
   }
 }
 </script>

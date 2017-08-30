@@ -24,15 +24,12 @@ export default {
 				spinnerType:'default',
 			})
 			//登录成功，关闭加载框，改变登录界面的过渡动画，改变登录界面显示状态，改变登录状态
-			setTimeout(() =>{
-				Indicator.close();
-				this.$store.commit('CHANGE_LOGINTRANSTION','slide-bottom')
-				setTimeout(()=>{
-					this.$router.replace({name:'Me'})
-					this.$store.commit('CHANGE_LOGINVIEW_STATUS',false)
-					this.$store.commit('CHANGE_LOGIN_STATUS',true)
-				},20)
-			}, 2000);
+      this.$store.dispatch('login').then(resolve=>{
+        if(resolve){
+          this.$router.replace({name:'Me'})
+          Indicator.close();
+        }
+      })
 		}
 	}
 }

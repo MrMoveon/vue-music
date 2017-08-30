@@ -18,7 +18,7 @@
 
                 <div class="singel-label">{{item.label}}</div>
 
-                <mui-cell radius :to="{name:'SingerDetail'}" :arrow='false' :img="list.url" :title="list.Fsinger_name" v-for="(list,sindex) in item.list" :key="sindex" >
+                <mui-cell radius :to="{name:'SingerDetail',params:{id:list.Fsinger_mid}}" :arrow='false' :img="list.url" :title="list.Fsinger_name" v-for="(list,sindex) in item.list" :key="sindex" >
                 </mui-cell>
                 
             </mui-scroll-view-item>
@@ -64,6 +64,7 @@ export default {
                            listGroup.hot.list.push({
                                 Fsinger_id:item.Fsinger_id,
                                 Fsinger_name:item.Fsinger_name,
+                                Fsinger_mid:item.Fsinger_mid,
                                 url:`https://y.gtimg.cn/music/photo_new/T001R150x150M000${item.Fsinger_mid}.jpg?max_age=2592000`
                             })
                        }
@@ -76,6 +77,7 @@ export default {
                        listGroup[item.Findex].list.push({
                            Fsinger_id:item.Fsinger_id,
                            Fsinger_name:item.Fsinger_name,
+                           Fsinger_mid:item.Fsinger_mid,
                            url:`https://y.gtimg.cn/music/photo_new/T001R150x150M000${item.Fsinger_mid}.jpg?max_age=2592000`
                        })
                    });

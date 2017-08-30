@@ -1,18 +1,17 @@
 <template>
     <div class="mui-page music-singer-detail">
-        <!-- https://y.gtimg.cn/music/photo_new/T001R300x300M000002J4UUk29y8BY.jpg?max_age=2592000 -->
-        <mui-header title="歌手详情" color="green" fixed>
+        <mui-header :title="singer.Fsinger_name" color="green" fixed>
             <mui-icon name="arrowleft" slot="left" @click="back"></mui-icon>
             <div slot="right">
                 <mui-icon name="more_android_light" @click="back"></mui-icon>
             </div>
         </mui-header>
         <div class="top-container">
-            <div class="top-container-bg" ref="bg" style="background-image:url(https://y.gtimg.cn/music/photo_new/T001R300x300M000002J4UUk29y8BY.jpg?max_age=2592000)">
+            <div class="top-container-bg" ref="bg" :style="{backgroundImage:`url(${singer.url})`}">
             </div>
         </div>
         <div class="tool-btn" ref="toolBtn">
-            <mui-button outlined type="white">
+            <mui-button outlined type="white"  @click="handleFocus">
                 <mui-icon name="staro"></mui-icon>关注</mui-button>
             <mui-button outlined type="white">
                 <mui-icon name="customerservice"></mui-icon>随机播放全部</mui-button>
@@ -20,14 +19,7 @@
         <div class="singerdetail-container-wrap">
             <mui-scroll-view class="singerdetail-container" ref="singerDetailScrollV" name="singerdetail-scroll-v" direction="vertical" slidesPerView="auto" :scrollbar="null">
                 <mui-scroll-view-item class="singer-songlist" style="height:auto">
-                    <mui-media-cell title="hello" desc="desc"></mui-media-cell>
-                    <mui-media-cell title="hello" desc="desc"></mui-media-cell>
-                    <mui-media-cell title="hello" desc="desc"></mui-media-cell>
-                    <mui-media-cell title="hello" desc="desc"></mui-media-cell>
-                    <mui-media-cell title="hello" desc="desc"></mui-media-cell>
-                    <mui-media-cell title="hello" desc="desc"></mui-media-cell>
-                    <mui-media-cell title="hello" desc="desc"></mui-media-cell>
-                    <mui-media-cell title="hello" desc="desc"></mui-media-cell>
+                    <mui-media-cell :title="item.albumName" :desc="descript(item)" v-for="(item,index) in singer.singerSong" :key="index"></mui-media-cell>
                 </mui-scroll-view-item>
             </mui-scroll-view>
         </div>
@@ -35,22 +27,50 @@
 </template>
 
 <script>
+import {getSingerDetail} from '@/api/music'
 export default {
     name: 'SingerDetail',
     data() {
         return {
-
+            singer:{
+                Fsinger_name:'',
+                url:'',
+                singerSong:[]
+            }
         }
     },
+    
     mounted() {
+        
         setTimeout(() => {
+            this.loadData()
+        }, 20);
+    },
+    activated(){
+         setTimeout(() => {
             this.loadData()
         }, 20);
     },
     methods: {
         loadData() {
-            this.$refs.singerDetailScrollV.update()
-            this.$refs.singerDetailScrollV.done(this.scrolling())
+            getSingerDetail(this.$route.params.id).then(res=>{
+                console.log(res)
+                if(res.code===0){
+                    this.singer={
+                        Fsinger_name:res.data.singer_name,
+                        Fsinger_mid:res.data.singer_mid,
+                        url:`https://y.gtimg.cn/music/photo_new/T001R300x300M000${res.data.singer_mid}.jpg?max_age=2592000`,
+                        singerSong:res.data.list
+                    }
+                    this.$nextTick(()=>{
+                        this.$refs.singerDetailScrollV.update()
+                         this.$refs.singerDetailScrollV.done(this.scrolling())
+                    })
+                    
+                    
+                }
+            })
+            
         },
         scrolling() {
             // 获取 musicScrollV 的 swiper对象
@@ -83,6 +103,21 @@ export default {
             })
            
         },
+        descript(item){
+            return `${item.singerName} .  ${item.company}`
+        },
+        handleFocus(){
+            this.$store.dispatch('focusSinger',{
+                Fsinger_name:this.singer.Fsinger_name,
+                Fsinger_mid:this.singer.Fsinger_mid,
+                url:this.singer.url
+            }).then((resolve)=>{
+                this.$Toast('关注成功')
+            },(reject)=>{
+                this.$Toast('您还没有登录')
+                
+            })
+        },
         back() {
             this.$router.go(-1)
         }
@@ -104,10 +139,20 @@ export default {
         right: 0;
         top: 0;
         z-index: 7;
+        
     }
     .top-container-bg {
-        height: 610/@rem;
+        height: 750/@rem;
         background-size: cover; // filter: blur(5px);
+        &:after{
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top:0;
+            bottom:0;
+            background: rgba(0,0,0,0.4)
+        }
     }
     .tool-btn {
         position: absolute;
@@ -115,7 +160,7 @@ export default {
         right: 0;
         top: 440/@rem;
         text-align: center;
-        z-index: 8;
+        z-index: 10;
         .font-dpr(12px);
         .mui-button {
             border-radius: 60/@rem;

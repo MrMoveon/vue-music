@@ -54,7 +54,7 @@ export default new Router({
             name: 'Singer',
             component: Singer
         }, {
-            path: '/main/music/singer/detail',
+            path: '/main/music/singer/detail/:id',
             name: 'SingerDetail',
             component: SingerDetail
         }, {

@@ -6,29 +6,26 @@
         <router-view></router-view>
       </keep-alive>
     </transition>
-    <transition :name="loginTransition">
-      <music-login v-if="loginViewVisibel"></music-login>
-    </transition>
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
 import MusicHeader from './MusicHeader'
-import MusicLogin from '../me/login/Login'
+
 export default {
   name: 'main',
   data(){
     return {
-      mainTransition1:"slide-left"
+
     }
   },
   components: {
     MusicHeader,
-    MusicLogin
   },
   watch: {
     '$route' (to, from) {
+      // main tab左右滑动
       const toTabNum=to.meta.tab;
       const fromTabNum=from.meta.tab;
       let animate=toTabNum < fromTabNum ? 'slide-right' :'slide-left'
@@ -37,9 +34,6 @@ export default {
   },
   computed:{
     ...mapGetters([
-      'isLogin',
-      'loginViewVisibel',
-      'loginTransition',
       'mainTransition'
       ])
   }

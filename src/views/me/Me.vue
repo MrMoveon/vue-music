@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
 import MeLogin from './MeLogin'
 import MeMenu from './MeMenu'
 export default {
@@ -33,26 +32,9 @@ export default {
 
         }
     },
-    computed:{
-        ...mapGetters[
-            'loginTransition'
-        ]
-    },
-    watch:{
-        "$route"(to,from){
-            // 如果为登录界面返回，设置登录界面返回的过渡动画，并改变登录界面的显示
-            if(from.query.view==='login'){
-                this.$store.commit('CHANGE_LOGINTRANSTION','slide-bottom')
-                setTimeout(()=>{
-                    this.$store.commit('CHANGE_LOGINVIEW_STATUS',false)
-                },20)
-            }
-        }
-    },
     components: {
         MeLogin,
         MeMenu
-
     }
 }
 </script>

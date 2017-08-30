@@ -67,7 +67,7 @@ export default {
 
             scroll.on('TouchStart', function (swiper, event) {
                 //获取按下的pageY值
-                var touch = event.touches[0]
+                var touch = event.changedTouches[0]
                 vm.pageY1 = touch.pageY;
                 //通过定时器来获取滑动中translate的值，并判断顶部搜索框的隐藏显示
                 clearInterval(vm.timer);
@@ -77,7 +77,7 @@ export default {
             })
             scroll.on('TouchMove', function (swiper, event) {
                 //获取移动的pageY值
-                var touch = event.touches[0]
+                var touch = event.changedTouches[0]
                 vm.pageY2 = touch.pageY;
                 //通过pageY1,2的值判断上滑下滑
                 if (vm.pageY2 - vm.pageY1 < 0) {

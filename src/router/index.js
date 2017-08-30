@@ -60,12 +60,18 @@ export default new Router({
                 {
                     path: 'all',
                     name: 'SingerAll',
-                    component: SingerAll
+                    component: SingerAll,
+                    meta:{
+                        tab:1
+                    }
                 },
                 {
                     path: 'focus',
                     name: 'SingerFocus',
-                    component: SingerFocus
+                    component: SingerFocus,
+                    meta:{
+                        tab:2
+                    }
                 }
             ]
         },

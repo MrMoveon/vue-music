@@ -16,9 +16,11 @@
             </div>
         </mui-header>
         <div class="singer-tab-container">
-           <keep-alive>
-                <router-view></router-view>
-           </keep-alive>
+            <transition :name="tabAnimate">
+                <keep-alive>
+                    <router-view></router-view>
+                </keep-alive>
+            </transition>
         </div>
         
     </div>
@@ -32,9 +34,18 @@ export default {
     mixins:[back],
     data(){
         return {
-           
+           tabAnimate:'slide-left'
         }
     },
+    watch: {
+    '$route' (to, from) {
+      // main tab左右滑动
+      const toTabNum=to.meta.tab;
+      const fromTabNum=from.meta.tab;
+      this.tabAnimate=toTabNum < fromTabNum ? 'slide-right' :'slide-left'
+     
+    }
+  },
     mounted(){
        
     },

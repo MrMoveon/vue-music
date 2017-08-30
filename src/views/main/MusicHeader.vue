@@ -2,9 +2,9 @@
     <div class="music-header">
         <mui-header title="音乐馆" fixed tabs color="green">
             
-            <router-link :to="{name:'Music',query:{'slidebar':true}}" slot="left" tag="span">
+            <span slot="left"  @click="handleMenu">
                  <mui-icon name='caidan'></mui-icon>
-            </router-link>
+            </span>
             <div class="mui-header-tabs" slot="middle">
                 <router-link :to="{name:'Me'}" tag='a' class="mui-header-tabs-item" replace>我的</router-link>
                 <router-link :to="{name:'Music'}" tag='a' class="mui-header-tabs-item" replace>音乐馆</router-link>
@@ -24,7 +24,10 @@ export default {
     methods:{
         ...mapMutations([
             'CHANGE_SEARCH_STATUS'
-        ])
+        ]),
+        handleMenu(){
+            this.$emit('onmenu')
+        }
     },
     components: {
         MusicTopSearch

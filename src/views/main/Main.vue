@@ -1,27 +1,29 @@
 <template>
   <div class="mui-page">
-    <music-header></music-header>
+    <music-header v-on:onmenu="handlemenu"></music-header>
     <transition :name="mainTransition">
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
     </transition>
+    <mui-side-bar :visible.sync="sidebarShow" ref="sidebar"></mui-side-bar>
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
 import MusicHeader from './MusicHeader'
-
+import MuiSideBar from '@/components/sidebar/Sidebar'
 export default {
   name: 'main',
   data(){
     return {
-
+      sidebarShow:false
     }
   },
   components: {
     MusicHeader,
+    MuiSideBar
   },
   watch: {
     '$route' (to, from) {
@@ -36,6 +38,13 @@ export default {
     ...mapGetters([
       'mainTransition'
       ])
+  },
+  methods:{
+    handlemenu(){
+     
+      this.sidebarShow=true
+     
+    }
   }
 }
 </script>

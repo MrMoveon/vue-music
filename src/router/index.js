@@ -17,6 +17,7 @@ import Error from '@/views/error/Error'
 
 Vue.use(Router)
 
+
 export default new Router({
     linkActiveClass: 'active',
     routes: [

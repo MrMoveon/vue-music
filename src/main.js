@@ -15,13 +15,13 @@ import '@/libs/swiper/css/swiper.min.css'
 
 import muiComponents from '@/components'
 import Toast from '@/components/toast'
+import Dialog from '@/components/dialog'
 import storage from './utils/storage'
 Vue.config.productionTip = false
 
 Vue.use(vueAxios, axios)
 Vue.use(muiComponents)
 Vue.use(Toast)
-
 // 使用vue-lazyload插件，
 Vue.use(VueLazyload, {
   preLoad: 1.3,
@@ -30,6 +30,7 @@ Vue.use(VueLazyload, {
   attempt: 1
 })
 Fastclick.attach(document.body)
+Vue.prototype.$Dialog=Dialog
 //具有顶部搜索框的路由
 var hasSearchRouter = ['Me', 'Music', 'Found']
 router.beforeEach((to, from, next) => {

@@ -5,7 +5,7 @@
                 <img v-lazy="img">
             </div>
             <div class="mui-icon" v-if="icon">
-                <span class="iconfont" :class="icon" :style="{color:iconColor}"></span>
+                <span class="iconfont" :class="'icon-'+icon" :style="{color:iconColor}"></span>
             </div>
             <div class="mui-text">
                 <span class="title mui-ellipsis-1" v-if="title" v-text="title"></span>

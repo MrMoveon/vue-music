@@ -1,5 +1,5 @@
 <template>
-    <span class="iconfont" :class="'icon-'+name" @click="handleClick">
+    <span class="iconfont mui-icon" :class="'icon-'+name"  @click="handleClick">
     </span>
 </template>
 

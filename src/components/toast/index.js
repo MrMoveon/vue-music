@@ -13,7 +13,7 @@ let Toast=(options={})=>{
     ToastInstance.icon=options.icon || '';                           //设置toast组件props的icon
     ToastInstance.id=id;                                                                //设置toast组件id
     ToastInstance.tIndex=tid;                                                           //设置toast组件z-index
-    ToastInstance.styles=options.styles;
+    ToastInstance.styles=options.styles;                                                //自定义样式
     ToastInstance.vm = ToastInstance.$mount()                                           // 挂载但是并未插入dom，是一个完整的Vue实例
     document.body.appendChild(ToastInstance.vm.$el)                                     // 将dom插入body
     Vue.nextTick(() => {

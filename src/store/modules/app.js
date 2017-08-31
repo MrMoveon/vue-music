@@ -122,6 +122,11 @@ const app={
                 }, 20);
             }
             
+        },
+        //退出登录
+        logout({commit,state}){
+            commit(types.CHANGE_LOGIN_STATUS,false)
+            storage.set('uid',null)
         }
         
 

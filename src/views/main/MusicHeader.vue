@@ -10,7 +10,7 @@
                 <router-link :to="{name:'Music'}" tag='a' class="mui-header-tabs-item" replace>音乐馆</router-link>
                 <router-link :to="{name:'Found'}" tag='a' class="mui-header-tabs-item" replace>发现</router-link>
             </div>
-            <mui-icon name='more_light' slot="right"></mui-icon>
+            <mui-icon name='more_light' slot="right" @click="$emit('rightbtn')"></mui-icon>
         </mui-header>
         <music-top-search :class="{'is-hide':$store.state.app.searchStatus}"></music-top-search>
     </div>

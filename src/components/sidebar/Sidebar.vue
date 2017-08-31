@@ -1,15 +1,16 @@
 <template>
   <div class="mui-sidebar" v-show="visible">
       <transition :name="transition">
-      <div class="mui-sidebar-container" v-show="containerShow">
-          123123
+      <div class="mui-sidebar-container" ref="muiSidebarContainer" v-show="containerShow" >
+          <slot></slot>
       </div>
       </transition>
-      <div class="mui-sidebar-mask" @touchend.prevent="handleClose"></div>      
+      <div class="mui-sidebar-mask" @touchend.stop="handleClose"></div>      
   </div>
 </template>
 
 <script>
+import Dom from '@/utils/dom'
 export default {
     name:'SideBar',
     props:{
@@ -29,24 +30,44 @@ export default {
         },
         visible(val){
             if(val){
+                if(this.$router) this.$router.push({name:this.$route.name,query:{sidebar:'true'}})
+                this.switch=false
                 setTimeout(()=> {
                     this.containerShow=true
                 }, 20);
+            }else{
+
+                if(this.$router) this.$router.go(-1)
             }
-        }
+        },
+        '$route'(to, from) {
+            // 路由返回，关闭弹框
+			if(from.query.sidebar){
+                this.handleClose()
+            }
+		}
+        
     },
     data(){
         return {
             sidebarShow:this.visible,
             containerShow:false,
-            transition:'sidebar-left'
+            transition:'sidebar-left',
+
         }
+    },
+    mounted () {
+        this.touch={}
     },
     methods:{
         handleClose(){
-            this.transition='sidebar-right'
-            this.containerShow=!this.containerShow;
+            if(!this.switch){
+                this.transition='sidebar-right'
+                this.containerShow=!this.containerShow
+                this.switch=true
+            }
         }
+        
     }
 }
 </script>

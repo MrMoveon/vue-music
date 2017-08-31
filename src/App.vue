@@ -5,7 +5,7 @@
         <router-view></router-view>
       </keep-alive>
     </transition>
-	<transition :name="loginTransition">
+	 <transition :name="loginTransition">
       <music-login v-if="loginViewVisibel"></music-login>
     </transition>
   </div>

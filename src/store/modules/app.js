@@ -94,6 +94,7 @@ const app={
         },
         // 登录
         login({dispatch,commit,state}){
+           
             return new Promise((resolve,reject)=>{
                 setTimeout(()=>{
                     //登录状态

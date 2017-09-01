@@ -5,9 +5,10 @@
         <router-view></router-view>
       </keep-alive>
     </transition>
-	 <transition :name="loginTransition">
+	  <transition :name="loginTransition">
       <music-login v-if="loginViewVisibel"></music-login>
     </transition>
+    <music-play-view></music-play-view>
   </div>
 </template>
 
@@ -15,6 +16,7 @@
 import {mapGetters} from 'vuex'
 import MusicHeader from './views/common/MusicHeader'
 import MusicLogin from './views/me/login/Login'
+import MusicPlayView from './views/common/MusicPlayView'
 
 export default {
   name: 'app',
@@ -31,7 +33,8 @@ export default {
   },
   components: {
     MusicHeader,
-    MusicLogin
+    MusicLogin,
+    MusicPlayView
   },
   watch: {
     '$route' (to, from) {

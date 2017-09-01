@@ -87,7 +87,13 @@ export default {
 			const toTabNum = to.meta.tab;
 			const fromTabNum = from.meta.tab;
 			let animate = toTabNum < fromTabNum ? 'slide-right' : 'slide-left'
+			
 			this.$store.commit('CHANGE_MAINTRANSTION', animate)
+		},
+		sidebarShow(val){
+			if(!val){
+				this.$Dialog.close()
+			}
 		}
 	},
 	computed: {
@@ -95,13 +101,7 @@ export default {
 			'mainTransition'
 		])
 	},
-	watch:{
-		sidebarShow(val){
-			if(!val){
-				this.$Dialog.close()
-			}
-		}
-	},
+	
 	methods: {
 		// 打开左侧菜单
 		handlemenu() {

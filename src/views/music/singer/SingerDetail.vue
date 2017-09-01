@@ -222,6 +222,7 @@ export default {
         .font-dpr(12px);
         .mui-button {
             border-radius: 60/@rem;
+            .font-dpr(12px);
         }
     }
     .singerdetail-container-wrap {

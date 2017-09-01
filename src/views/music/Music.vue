@@ -56,7 +56,6 @@ export default {
             })
         },
         loadAll() {
-
             Promise.all([getSilde(), getNewSong(), getRecommend()]).then(results => {
                 this.slideData = results[0].data.slider
                 if (results[1].code === 0) {

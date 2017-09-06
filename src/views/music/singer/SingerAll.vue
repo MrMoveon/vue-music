@@ -27,7 +27,7 @@
 <script>
 
 import {getSinger} from '@/api/music'
-import Dom from '@/utils/dom'
+import mui from '@/utils/mui'
 export default {
     name:'SingerAll',
 
@@ -102,7 +102,8 @@ export default {
         },
         handleShortcut(e){
            // 获取点击的索引
-           var index=Dom.getData(e.target,'index')
+          
+           var index=mui(e.target).get(0).dataset.index;
            this.currentIndex=parseInt(index)
            //跳转到索引项
            this.$refs.singerScrollV.slideTo(index)
@@ -111,8 +112,11 @@ export default {
            // console.log(e)
            //获取手指移动的元素
            var element = document.elementFromPoint(e.touches[0].pageX, e.touches[0].pageY);
+           if(!mui(element).attr('data-index')){
+               return 
+           }
             // 获取点击的索引
-           var index=Dom.getData(element,'index')
+           var index=mui(element).get(0).dataset.index;
            if(index==null) return 
            this.currentIndex=parseInt(index)
            //跳转到索引项

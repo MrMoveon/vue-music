@@ -4,6 +4,7 @@ import storage from '../../utils/storage'
 import _ from 'underscore'
 const app={
     state:{
+        sidebarShow:false,
         searchStatus:false,         //顶部搜索的状态
         isLogin:false,              //判断是否登录
         loginViewVisibel:false,     //登录界面显示状态
@@ -12,6 +13,9 @@ const app={
         focusSinger:[]              //关注的歌手
     },
     mutations:{
+        [types.CHANGE_SIDEBAR](state,val){
+            state.sidebarShow=val
+        },
         [types.CHANGE_SEARCH_STATUS](state,val){
             state.searchStatus=val
         },

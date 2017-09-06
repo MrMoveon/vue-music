@@ -21,7 +21,7 @@ const play={
             state.currentIndex=val
         },
         [types.SET_PLAY_LIST](state,list){
-            state.playList=list
+            state.playList.push(list)
         },
         [types.SET_SEQUENCE_LIST](state,list){
             state.sequenceList=list
@@ -31,7 +31,13 @@ const play={
         }
     },
     actions: {
-       
+        fullScreenPlay({commit,dispatch,state},song){
+         commit(types.SET_FULL_SCREEN,true)
+         commit(types.SET_PLAY_STATE,true)
+         commit(types.SET_PLAY_LIST,song)
+         commit(types.SET_CURRENT_INDEX,state.playList.length-1)
+         
+       }
     }
 }
 export default play

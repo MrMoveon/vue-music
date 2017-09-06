@@ -118,3 +118,75 @@ export function getSingerDetail(singermid){
         })
     })
 }
+export function getSingerInfo(albummid){
+    let url='https://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg'
+    let data=Object.assign({},commonParams,{
+        albummid:albummid,
+        g_tk:5381,
+        loginUin:0,
+        hostUin:0,
+        format:"jsonp",
+        inCharset:"utf8",
+        outCharset:"utf-8",
+        notice:0,
+        platform:"yqq",
+        needNewCode:0
+    })
+    
+    return jsonp(url, data, opts).then(res=>{
+        return new Promise((resolve,reject)=>{
+            resolve(res)
+        })
+    })
+}
+export function getSong(songmid){
+    let url='api/getSong'
+    let data={
+        g_tk:5381,
+        loginUin:0,
+        hostUin:0,
+        format:"jsonp",
+        inCharset:"utf8",
+        outCharset:"utf-8",
+        notice:0,
+        platform:"yqq",
+        needNewCode:0,
+        cid:205361747,
+        uin:0,
+        songmid:songmid,
+        filename:"C400"+songmid+".m4a",
+        guid:227092740
+    }
+    data=Object.assign({},commonParams,data)
+    return axios.get(url,{params:data}).then(res=>{
+        return new Promise((resolve,reject)=>{
+            resolve(res)
+        })
+    })
+}
+
+// export function getSong(songmid){
+//     let url='https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg'
+//     let data=Object.assign({},commonParams,{
+//         g_tk:5381,
+//         loginUin:0,
+//         hostUin:0,
+//         format:"jsonp",
+//         inCharset:"utf8",
+//         outCharset:"utf-8",
+//         notice:0,
+//         platform:"yqq",
+//         needNewCode:0,
+//         cid:205361747,
+//         uin:0,
+//         songmid:songmid,
+//         filename:"C400"+songmid+".m4a",
+//         guid:227092740,
+//     })
+    
+//     return jsonp(url, data, opts).then(res=>{
+//         return new Promise((resolve,reject)=>{
+//             resolve(res)
+//         })
+//     })
+// }

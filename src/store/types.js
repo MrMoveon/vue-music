@@ -1,4 +1,6 @@
 //搜索栏的状态
+export const CHANGE_SIDEBAR = 'CHANGE_SIDEBAR'
+//搜索栏的状态
 export const CHANGE_SEARCH_STATUS = 'CHANGE_SEARCH_STATUS'
 //登录状态
 export const CHANGE_LOGIN_STATUS = 'CHANGE_LOGIN_STATUS'

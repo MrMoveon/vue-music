@@ -1,4 +1,7 @@
 const getters = {
+    sidebarShow(state){
+        return state.app.sidebarShow
+    },
     isLogin(state) {
         return state.app.isLogin
     },
@@ -24,7 +27,7 @@ const getters = {
         return state.play.currentIndex
     },
     currentSong(state){
-        return state.play.playList[state.play.currentIndex]
+        return state.play.playList[state.play.currentIndex] || []
     },
     playList(state){
         return state.play.playList

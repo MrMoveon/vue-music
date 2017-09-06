@@ -21,7 +21,9 @@
         <div class="singerdetail-container-wrap">
             <mui-scroll-view class="singerdetail-container" ref="singerDetailScrollV" name="singerdetail-scroll-v" direction="vertical" slidesPerView="auto" :scrollbar="null">
                 <mui-scroll-view-item class="singer-songlist" style="height:auto">
-                    <mui-media-cell :title="item.albumName" :desc="descript(item)" v-for="(item,index) in singer.singerSong" :key="index"></mui-media-cell>
+                    <div  @click="toPlay(item)" v-for="(item,index) in singer.singerSong" :key="index">
+                    <mui-media-cell :title="item.albumName" :desc="descript(item)" :key="index"></mui-media-cell>
+                    </div>
                 </mui-scroll-view-item>
             </mui-scroll-view>
         </div>
@@ -33,7 +35,8 @@ import _ from 'underscore'
 import tips from '@/mixins/tips'
 import back from '@/mixins/back'
 import Indicator from '@/components/indicator'
-import {getSingerDetail} from '@/api/music'
+import {getSingerDetail,getSingerInfo,getSong} from '@/api/music'
+import mui from '@/utils/mui'
 export default {
     name: 'SingerDetail',
     mixins:[tips,back],
@@ -97,6 +100,11 @@ export default {
                 this.$refs.singerDetailScrollV.update()
                 this.$refs.singerDetailScrollV.done(this.scrolling())
             }
+        },
+        '$route' (to, from) {
+           if(from.query.play){
+               this.$store.commit('SET_FULL_SCREEN',false);
+           }
         }
     },
     methods: {
@@ -113,23 +121,26 @@ export default {
                     }
                     this.$nextTick(()=>{
                         this.$refs.singerDetailScrollV.update()
-                         this.$refs.singerDetailScrollV.done(this.scrolling())
+                        this.$refs.singerDetailScrollV.done(this.scrolling())
                     })
                 }
             })
             
+        },
+        getSongInfo(){
+
         },
         scrolling() {
             // 获取 musicScrollV 的 swiper对象
             var vm = this;
             var scroll = vm.$refs.singerDetailScrollV.getCurrentObj()
             var bgHeight = this.$refs.bg.clientHeight
-            var bg = vm.$refs.bg
-            var toolBtn = vm.$refs.toolBtn
+            var bg =mui(vm.$refs.bg)
+            var toolBtn =mui(vm.$refs.toolBtn)
             scroll.on('TouchStart', function(swiper, event) {
                 // 清除transition
-                bg.style.transition = ``
-                toolBtn.style.transition = ``
+                bg.css('transition','')
+                toolBtn.css('transition','')
             })
             scroll.on('TouchMove', function(swiper, event) {
                 //移动的时候，设置bg的scale缩放
@@ -137,19 +148,26 @@ export default {
                 var translate = scroll.getWrapperTranslate()
                 if (translate > 0) {
                     scale += translate / bgHeight
-                    bg.style.transform = `scale(${scale})`
-                    toolBtn.style.transform = `translate(0,${translate + 'px'}`
-                    toolBtn.style.zIndex=10
+                    bg.css('scale',parseInt(scale*100))
+                    toolBtn.css({
+                        'zIndex':10,
+                        'translateY':translate
+                    })
+                  
                 }else{
-                    toolBtn.style.zIndex=8
+                     toolBtn.css('zIndex',8)
                 }
             })
             scroll.on('TouchEnd', function(swiper, event) {
-                bg.style.transition = `all 0.3s`
-                bg.style.transform = `scale(1)`
-                toolBtn.style.transition = `all 0.3s`
-                toolBtn.style.transform = `translate(0,0)`
-                
+                bg.css({
+                    'transition':'all 0.3s',
+                    'scale':100
+                })
+                toolBtn.css({
+                    'transition':'all 0.3s',
+                    'translateY':0
+                })
+              
             })
            
         },
@@ -177,6 +195,30 @@ export default {
         cancelFocus(){
             var index=this.isFocus
             this.$store.dispatch('cancelSinger',{Fsinger_name:this.singer.Fsinger_name})
+        },
+        //跳转播放界面
+        toPlay(item){
+            getSingerInfo(item.albumMID).then(res=>{
+                if(res.code===0){
+                   getSong(res.data.list[0].songmid).then(res1=>{
+
+                       var songItem=res1.data.data.items[0]
+                       var song={
+                           singername:res.data.singername,
+                           singermid:res.data.singermid,
+                           songmid:songItem.songmid,
+                           songname:res.data.name,
+                           songimg:`https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.albumMID}.jpg?max_age=2592000`,
+                           songurl:`http://dl.stream.qqmusic.qq.com/${songItem.filename}?vkey=${songItem.vkey}&guid=227092740&uin=0&fromtag=66`
+                       }
+                       this.$store.dispatch('fullScreenPlay',song);
+                       //设置播放器路由
+                       var route=this.$route;
+                       this.$router.push({name:route.name,params:{id:route.params.id},query:{play:true}})
+                   })
+                }
+            })
+            
         }
         
     }

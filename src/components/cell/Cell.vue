@@ -114,7 +114,7 @@ export default {
             
         }
         .title{
-            .font-dpr(16px);
+            .font-dpr(14px);
             color:#333;
         }
         

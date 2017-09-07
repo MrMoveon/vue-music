@@ -4,7 +4,9 @@
         <transition name="normal">
             <div class="mui-page fullscreen-play" v-show="fullScreen">
                 <mui-header :title="currentSong.songname" color="green" fixed>
-                    <mui-icon name="zhankai" slot="left" @click.stop="hide"></mui-icon>
+                    <div slot="left"  @click="hide">
+                        <mui-icon name="zhankai"></mui-icon>
+                    </div>
                     <div slot="right">
                         <mui-icon name="more_android_light"></mui-icon>
                     </div>
@@ -19,7 +21,7 @@
                     <div class="play-middle-left item">
                         <div class="play-middle-cd">
                             <div class="cd-thumb ">
-                                <img :src="currentSong.songimg" class="rotate" alt="">
+                                <img :src="currentSong.songimg" class="rotate cd-thumb-img" alt="">
                             </div>
                         </div>
                         <div class="play-middle-mini-lyric">
@@ -65,12 +67,12 @@
                 </div>
             </div>
         </transition>
-        <!-- <transition name="mini"> -->
-        <div class="mini-play"  v-show="!fullScreen"  @click.stop="show">
+        <transition name="mini">
+        <div class="mini-play"  v-show="!fullScreen"  @click="show">
             <div class="mini-play-left">
                 <div class="mini-play-thumb">
                     <div class="thumb rotate" >
-                        <img  class="" :src="currentSong.songimg" alt="">
+                        <img  class="mini-cd-img" :src="currentSong.songimg" alt="">
                     </div>
                 </div>
                 <div class="mini-play-text">
@@ -84,7 +86,7 @@
                 <div class="mini-collection-btn  r-btn"><mui-icon name="hearto"></mui-icon></div>
             </div>
         </div>
-        <!-- </transition>  -->
+        </transition> 
         <audio ref="audio"  :src="currentSong.songurl" @play="ready" @error="error"></audio>
        
     </div>
@@ -93,6 +95,7 @@
 
 <script>
 import {mapGetters,mapActions} from 'vuex'
+import mui from '@/utils/mui'
 export default {
     name: 'MusicPlayView',
     data(){
@@ -115,9 +118,40 @@ export default {
         hide(){
            // this.$store.commit('SET_FULL_SCREEN',false)
            this.$router.go(-1)
+            mui('.cd-thumb').css('transition','none');
         },
         show(){
+             //设置播放器路由
+            var route=this.$route;
+            this.$router.push({name:route.name,params:{id:route.params.id},query:{play:true}})
             this.$store.commit('SET_FULL_SCREEN',true)
+           
+            setTimeout(()=> {
+               
+                 var thumb={
+                    transition:'all .4s',
+                    transform:"none",
+                    width:'',
+                    height:''
+                }
+                var miniThumb={
+                    
+                    translateX:"-"+mui('.cd-thumb').offset().left-mui('.mini-cd-img').offset().left+'px',
+                    translateY:mui('.mini-cd-img').offset().top-mui('.cd-thumb').offset().top+'px',
+                    width:mui('.mini-cd-img').offset().height+'px',
+                    height:mui('.mini-cd-img').offset().height+'px'
+                }
+                 setTimeout(()=> {
+                    mui('.cd-thumb').css(miniThumb);
+                    setTimeout(()=> {
+                        mui('.cd-thumb').css(thumb);
+                    }, 100);
+                }, 50);
+           
+            
+            }, 10);
+           
+            
         },
         ready(){
             this.songReady=true;
@@ -148,8 +182,9 @@ export default {
 @import '../../assets/less/variables.less';
 @import '../../assets/less/mixins.less';
 .music-play-view {
+
     .fullscreen-play{
-        transition: all 0.4s;
+    
         background: #555555;
         .singer-name{
             position: relative;
@@ -161,8 +196,7 @@ export default {
             padding-top:88/@rem;
             height: 40/@rem;
         }
-        &.normal-enter,&.normal-leave-to{
-            transition: all 0.4s;
+        &.normal-enter,&.normal-leave-active{
             opacity: 0;
             .mui-header{
                 transform: translateY(-100px)
@@ -171,14 +205,11 @@ export default {
                 transform:translateY(100px)
             }
         }
-        &.normal-enter-active,&.normal-leave-active{
-            opacity: 1;
+        &.normal-enter-active,&.normal-leave{
             .mui-header{
-                opacity: 1;
                 transform: translateY(0)
             }
             .play-bottom{
-                opacity: 1;
                 transform: translateY(0)
             }
         }
@@ -223,15 +254,17 @@ export default {
         justify-content: space-between;
         align-items: center;
         height: 110/@rem;
-        transition: all 0.3s;
-        // &.mini-enter,&.mini-leave-to{
-        //     opacity: 0;
-        //     transform: translateY(100px)
-        // }
-        // &.mini-enter-active,&.mini-leave-active{
-        //      opacity: 1;
-        //      transform: translateY(0)
-        // }
+        
+        &.mini-enter,&.mini-leave-active{
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(100px)
+        }
+        &.mini-enter-active,&.mini-leave{
+             transition: all 0.3s;
+             opacity: 1;
+             transform: translateY(0)
+        }
         .mini-play-left,.mini-play-right{
             display: flex;
             flex-direction: row;

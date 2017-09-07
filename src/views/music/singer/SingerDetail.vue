@@ -100,11 +100,6 @@ export default {
                 this.$refs.singerDetailScrollV.update()
                 this.$refs.singerDetailScrollV.done(this.scrolling())
             }
-        },
-        '$route' (to, from) {
-           if(from.query.play){
-               this.$store.commit('SET_FULL_SCREEN',false);
-           }
         }
     },
     methods: {

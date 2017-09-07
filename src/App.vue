@@ -90,6 +90,10 @@ export default {
   },
   watch: {
     '$route' (to, from) {
+			// 监听播放器返回
+			if(from.query.play){
+					this.$store.commit('SET_FULL_SCREEN',false);
+			}
       const toDepth = to.path.split('/').length
       const fromDepth = from.path.split('/').length
       this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
